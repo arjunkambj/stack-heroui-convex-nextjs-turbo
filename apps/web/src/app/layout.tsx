@@ -3,15 +3,22 @@ import "../styles/globals.css";
 import Providers from "@/components/Providers";
 import { StackProvider, StackTheme } from "@stackframe/stack";
 import { stackServerApp } from "@/stack/server";
-import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Plus_Jakarta_Sans,
+  Nunito_Sans,
+  Inter,
+  Figtree,
+} from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Databuddy } from "@databuddy/sdk/react";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const figtreeHeading = Figtree({
   subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-heading",
 });
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -56,9 +63,10 @@ export default function RootLayout({
       lang="en"
       className={cn(
         bricolage.variable,
-        plusJakarta.variable,
         appSans.variable,
         "font-sans",
+        inter.variable,
+        figtreeHeading.variable,
       )}
       suppressHydrationWarning
     >

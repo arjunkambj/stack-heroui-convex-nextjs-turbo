@@ -56,14 +56,14 @@ export function MarketingFooter() {
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Twitter"
             >
-              <Icon icon="ph:x-logo" width={20} />
+              <Icon icon="solar:twitter-square-linear" width={20} />
             </Link>
             <Link
               href="#"
               className="text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Instagram"
             >
-              <Icon icon="ph:instagram-logo" width={20} />
+              <Icon icon="solar:instagram-linear" width={20} />
             </Link>
           </div>
         </div>

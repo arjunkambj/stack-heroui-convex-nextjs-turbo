@@ -9,32 +9,35 @@ interface AuthLayoutProps {
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="min-h-dvh bg-[#fafaf9] p-4 lg:grid lg:grid-cols-2">
-      <aside className="relative hidden h-full overflow-hidden rounded-3xl bg-stone-900 text-white lg:flex">
+    <div className="min-h-dvh bg-background p-4 lg:grid lg:grid-cols-2">
+      <aside className="relative hidden h-full overflow-hidden rounded-3xl bg-card text-foreground lg:flex">
         {/* Soft gradient orbs */}
-        <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-orange-600/20 blur-3xl" />
-        <div className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-orange-400/10 blur-3xl" />
+        <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
 
         <div className="relative flex w-full flex-col justify-between p-10">
           <HomeLink />
 
           <div className="space-y-6">
             <blockquote className="font-display text-3xl font-bold tracking-tight leading-snug">
-              "Unifeed cut our reporting time by 80%. We finally see everything in one place."
+              "Unifeed cut our reporting time by 80%. We finally see everything
+              in one place."
             </blockquote>
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-orange-500/30 flex items-center justify-center text-sm font-bold">
+              <div className="h-10 w-10 rounded-full bg-primary/30 flex items-center justify-center text-sm font-bold">
                 SL
               </div>
               <div>
                 <p className="text-sm font-semibold">Sarah Lin</p>
-                <p className="text-xs text-stone-400">Head of Growth, Bloom</p>
+                <p className="text-xs text-muted-foreground">
+                  Head of Growth, Bloom
+                </p>
               </div>
             </div>
           </div>
 
-          <footer className="flex items-center justify-between border-t border-white/10 pt-6">
-            <p className="text-sm text-stone-400">
+          <footer className="flex items-center justify-between border-t border-border/10 pt-6">
+            <p className="text-sm text-muted-foreground">
               Track creators across every social platform.
             </p>
           </footer>
