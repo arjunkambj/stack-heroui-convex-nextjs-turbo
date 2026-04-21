@@ -37,6 +37,11 @@ const nextConfig = {
         hostname: "cdn.simpleicons.org",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+        pathname: "/**",
+      },
     ],
   },
 };

@@ -92,8 +92,10 @@ export default function SignInPage() {
   return (
     <div className="flex w-full max-w-sm flex-col gap-6">
       <div className="text-center">
-        <h1 className="text-2xl font-bold">Welcome to Unifeed</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <h1 className="font-display text-2xl font-bold tracking-tight text-stone-900">
+          Welcome to Unifeed
+        </h1>
+        <p className="mt-2 text-sm text-stone-500 font-light">
           {step === "email"
             ? "Enter your email to continue"
             : `We sent a code to ${email}`}
@@ -112,19 +114,23 @@ export default function SignInPage() {
             <Icon
               icon="ph:envelope"
               width={20}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/80"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400"
             />
             <Input
               type="email"
               placeholder="you@example.com"
-              className="pl-10"
+              className="pl-11 h-12 rounded-xl border-stone-200 bg-white text-stone-900 placeholder:text-stone-400 focus-visible:ring-orange-500/30 focus-visible:border-orange-400"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={isEmailLoading}>
+          <Button
+            type="submit"
+            className="w-full h-12 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-semibold"
+            disabled={isEmailLoading}
+          >
             {isEmailLoading ? (
               <Icon icon="svg-spinners:180-ring-with-bg" width={18} />
             ) : null}
@@ -133,7 +139,7 @@ export default function SignInPage() {
         </form>
       ) : (
         <div className="flex flex-col items-center gap-5 pt-1">
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-center text-sm text-stone-500 font-light">
             Enter the 6-character code from your email
           </p>
           <InputOTP
@@ -141,29 +147,33 @@ export default function SignInPage() {
             value={otp}
             onChange={(value) => setOtp(value.toUpperCase())}
             disabled={isVerifying}
-            containerClassName="w-full justify-center"
+            containerClassName="w-full justify-center gap-2"
           >
             <InputOTPGroup>
               {[0, 1, 2, 3, 4, 5].map((index) => (
-                <InputOTPSlot key={index} index={index} />
+                <InputOTPSlot
+                  key={index}
+                  index={index}
+                  className="rounded-xl border-stone-200 h-12 w-12 text-lg font-semibold text-stone-900 focus-visible:ring-orange-500/30 focus-visible:border-orange-400"
+                />
               ))}
             </InputOTPGroup>
           </InputOTP>
           {isVerifying ? (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm text-stone-500">
               <Icon icon="svg-spinners:180-ring-with-bg" width={16} />{" "}
               Verifying...
             </div>
           ) : null}
           <div className="flex flex-col items-center gap-2 text-sm">
-            <p className="text-xs text-muted-foreground/80">
+            <p className="text-xs text-stone-400">
               {resendCooldown > 0
                 ? `Resend available in ${resendCooldown}s`
                 : "Didn't get the code?"}
             </p>
             <button
               type="button"
-              className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
+              className="text-stone-500 transition-colors hover:text-stone-900 disabled:opacity-50 font-medium"
               disabled={isEmailLoading || resendCooldown > 0}
               onClick={() => void handleSendMagicLink("resend")}
             >
@@ -171,7 +181,7 @@ export default function SignInPage() {
             </button>
             <button
               type="button"
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className="text-stone-500 transition-colors hover:text-stone-900 font-medium"
               onClick={() => {
                 setStep("email");
                 setOtp("");
@@ -186,14 +196,14 @@ export default function SignInPage() {
       )}
 
       <div className="flex items-center gap-3">
-        <Separator className="flex-1" />
-        <span className="text-xs text-muted-foreground/80">OR</span>
-        <Separator className="flex-1" />
+        <Separator className="flex-1 bg-stone-200" />
+        <span className="text-xs text-stone-400 font-medium">OR</span>
+        <Separator className="flex-1 bg-stone-200" />
       </div>
 
       <Button
-        variant="secondary"
-        className="w-full"
+        variant="outline"
+        className="w-full h-12 rounded-xl border-stone-200 bg-white text-stone-700 hover:bg-stone-50 hover:text-stone-900 font-semibold"
         disabled={isGoogleLoading}
         onClick={async () => {
           setIsGoogleLoading(true);
@@ -209,7 +219,7 @@ export default function SignInPage() {
         {isGoogleLoading ? "Redirecting..." : "Continue with Google"}
       </Button>
 
-      <p className="text-center text-xs text-muted-foreground/80">
+      <p className="text-center text-xs text-stone-400">
         &copy; {new Date().getFullYear()} Unifeed. All rights reserved.
       </p>
     </div>

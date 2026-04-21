@@ -3,35 +3,46 @@ import "../styles/globals.css";
 import Providers from "@/components/Providers";
 import { StackProvider, StackTheme } from "@stackframe/stack";
 import { stackServerApp } from "@/stack/server";
-import { Inter, Noto_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Databuddy } from "@databuddy/sdk/react";
 
-const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-sans" });
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+});
 
-const inter = Inter({
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const appSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-app-sans",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Unifeed | Business Phone Number That Works Everywhere",
+  title: "Unifeed | Track Any Account Across All Socials",
   description:
-    "Get a virtual business number in minutes. Call, text, record, and share with your team -- from any device.",
+    "Unifeed tracks all your creators, competitors, and campaigns across TikTok, Instagram, YouTube, and X — no passwords required.",
   icons: {
     icon: "/icon",
   },
   openGraph: {
-    title: "Unifeed | Business Phone Number That Works Everywhere",
+    title: "Unifeed | Track Any Account Across All Socials",
     description:
-      "Get a virtual business number in minutes. Call, text, record, and share with your team -- from any device.",
+      "Unifeed tracks all your creators, competitors, and campaigns across TikTok, Instagram, YouTube, and X — no passwords required.",
     siteName: "Unifeed",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Unifeed | Business Phone Number That Works Everywhere",
+    title: "Unifeed | Track Any Account Across All Socials",
     description:
-      "Get a virtual business number in minutes. Call, text, record, and share with your team -- from any device.",
+      "Unifeed tracks all your creators, competitors, and campaigns across TikTok, Instagram, YouTube, and X — no passwords required.",
   },
 };
 
@@ -43,7 +54,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(inter.variable, "font-sans", notoSans.variable)}
+      className={cn(
+        bricolage.variable,
+        plusJakarta.variable,
+        appSans.variable,
+        "font-sans",
+      )}
       suppressHydrationWarning
     >
       <body className="font-sans" suppressHydrationWarning>
@@ -52,7 +68,7 @@ export default function RootLayout({
             <Providers>{children}</Providers>
           </StackTheme>
         </StackProvider>
-        <Databuddy clientId="89353fd5-c2c5-4dc2-8510-1360af7170dd" />
+        <Databuddy clientId="" />
       </body>
     </html>
   );
