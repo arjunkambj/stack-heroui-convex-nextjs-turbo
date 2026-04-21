@@ -90,7 +90,7 @@ export default function SignInPage() {
   }, [otp, nonce, isVerifying, app]);
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-6">
+    <div className="flex w-full sm:max-w-sm flex-col gap-6 mx-auto">
       <div className="text-center">
         <h1 className="font-display text-2xl font-bold tracking-tight text-foreground">
           Welcome to Unifeed
