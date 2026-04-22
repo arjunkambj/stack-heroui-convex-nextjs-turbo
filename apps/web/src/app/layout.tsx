@@ -69,6 +69,7 @@ export default function RootLayout({
         figtreeHeading.variable,
       )}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
     >
       <body className="font-sans" suppressHydrationWarning>
         <StackProvider app={stackServerApp}>
