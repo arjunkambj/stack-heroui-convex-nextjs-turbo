@@ -1,18 +1,23 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Icon } from "@iconify/react"
-import { sidebarMainItems, sidebarFooterItems } from "@/constants/sidebar-menu"
+import { sidebarMainItems, sidebarCategories, sidebarFooterItems } from "@/constants/sidebar-menu"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
+
 } from "@/components/ui/sidebar"
 import { UserProfile } from "./UserProfile"
 import Logo from "./Logo"
@@ -36,14 +41,37 @@ export function AppSidebar() {
                 tooltip={item.name}
                 isActive={pathname === item.href}
               >
-                <a href={item.href}>
+                <Link href={item.href}>
                   <Icon icon={item.icon} />
                   <span>{item.name}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
+        {sidebarCategories.map((category) => (
+          <SidebarGroup key={category.name}>
+            <SidebarGroupLabel>{category.name}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {category.items.map((item) => (
+                  <SidebarMenuItem key={item.name}>
+                    <SidebarMenuButton 
+                      asChild 
+                      tooltip={item.name}
+                      isActive={pathname === item.href}
+                    >
+                      <Link href={item.href}>
+                        <Icon icon={item.icon} />
+                        <span>{item.name}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
@@ -54,10 +82,10 @@ export function AppSidebar() {
                 tooltip={item.name}
                 isActive={pathname === item.href}
               >
-                <a href={item.href}>
+                <Link href={item.href}>
                   <Icon icon={item.icon} />
                   <span>{item.name}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
