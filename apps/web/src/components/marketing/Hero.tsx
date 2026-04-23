@@ -25,9 +25,9 @@ const Hero = () => {
       className="relative w-full min-h-[calc(90vh)] flex items-center justify-center overflow-hidden mt-13 pb-16 sm:pb-20 lg:pb-24 2xl:pb-28"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-14 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 gap-12 sm:gap-14 lg:gap-16 items-center">
           {/* Left Column - Text Content */}
-          <div className="text-center sm:text-left flex flex-col items-center sm:items-start px-2 sm:px-0">
+          <div className="text-center flex flex-col items-center px-2 sm:px-0">
             {/* Header  */}
             <h1 className="flex flex-col gap-4 font-semibold tracking-tight  text-pretty text-7xl mb-6">
               <span className="block text-balance text-default-900">
@@ -44,12 +44,12 @@ const Hero = () => {
             </h1>
 
             {/* Professional info */}
-            <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-pretty text-center sm:text-left max-w-xl mx-auto sm:mx-0 mb-0">
+            <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-pretty text-center max-w-xl mx-auto mb-0">
               Unifeed tracks all your creators, competitors, and campaigns across TikTok, Instagram, YouTube, and X — no passwords required.
             </p>
 
             {/* CTA Buttons */}
-            <div className="mt-10 sm:mt-12 flex flex-row flex-wrap justify-center sm:justify-start items-center gap-4">
+            <div className="mt-10 sm:mt-12 flex flex-row flex-wrap justify-center items-center gap-4">
               <Button
                 asChild
                 className="w-auto font-semibold h-11 sm:h-12 transition-all duration-200 active:scale-100 text-sm sm:text-base"
@@ -125,7 +125,7 @@ const Hero = () => {
         <div className="mt-20">
           <div className="mx-auto w-full max-w-7xl px-2 sm:px-4">
             <p className="text-center text-xs sm:text-sm text-muted-foreground mb-6 sm:mb-8">
-              Trusted by data‑driven D2C teams.
+              Trusted by brands and creators.
             </p>
             <div className="grid grid-cols-3 sm:flex sm:flex-nowrap items-center justify-between gap-6 sm:gap-8 lg:gap-12 text-default-400">
               {d2cBrands.map((brand) => (
