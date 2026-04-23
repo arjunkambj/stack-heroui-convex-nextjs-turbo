@@ -1,135 +1,26 @@
-import type {
-  NavItemConfig,
-  NavModuleConfig,
-  RailIconConfig,
-} from "@/types/sidebar";
+export interface MenuItem {
+  name: string
+  href: string
+  icon: string
+}
 
-export const railIcons: RailIconConfig[] = [
+export const sidebarMainItems: MenuItem[] = [
   {
-    moduleId: "home",
-    label: "Home",
-    icon: "ph:house",
-    defaultPath: "#",
+    name: "Overview",
+    href: "/",
+    icon: "solar:home-2-linear",
   },
-  {
-    moduleId: "phone",
-    label: "Phone",
-    icon: "ph:phone",
-    defaultPath: "#",
-  },
-];
+]
 
-export const bottomRailIcons: RailIconConfig[] = [
+export const sidebarFooterItems: MenuItem[] = [
   {
-    moduleId: "team",
-    label: "Teams",
-    icon: "ph:users",
-    defaultPath: "#",
+    name: "Settings",
+    href: "/settings",
+    icon: "solar:settings-linear",
   },
   {
-    moduleId: "settings",
-    label: "Settings",
-    icon: "ph:gear",
-    defaultPath: "#",
+    name: "Teams",
+    href: "/teams",
+    icon: "solar:users-group-rounded-linear",
   },
-];
-
-export const modules: NavModuleConfig[] = [
-  {
-    id: "home",
-    label: "Home",
-    icon: "ph:house",
-    defaultPath: "#",
-    sections: [
-      {
-        id: "main",
-        items: [
-          {
-            id: "overview",
-            label: "Overview",
-icon: "ph:house",
-            path: "#",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "phone",
-    label: "Phone",
-    icon: "ph:phone",
-    defaultPath: "#",
-    sections: [
-      {
-        id: "main",
-        items: [
-          {
-            id: "calls",
-            label: "Calls",
-            icon: "ph:phone",
-            path: "#",
-          },
-          {
-            id: "messages",
-            label: "Messages",
-            icon: "ph:chat-circle",
-            path: "#",
-          },
-          {
-            id: "contacts",
-            label: "Contacts",
-            icon: "ph:user",
-            path: "#",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "team",
-    label: "Teams",
-    icon: "ph:users",
-    defaultPath: "#",
-    sections: [
-      {
-        id: "main",
-        items: [
-          {
-            id: "members",
-            label: "Members",
-            icon: "ph:users",
-            path: "#",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "settings",
-    label: "Settings",
-    icon: "ph:gear",
-    defaultPath: "#",
-    sections: [
-      {
-        id: "main",
-        items: [
-          {
-            id: "general",
-            label: "General",
-            icon: "ph:gear",
-            path: "#",
-          },
-        ],
-      },
-    ],
-  },
-];
-
-export const utilities: NavItemConfig[] = [];
-
-export const sidebarData = {
-  railIcons,
-  bottomRailIcons,
-  modules,
-  utilities,
-};
+]

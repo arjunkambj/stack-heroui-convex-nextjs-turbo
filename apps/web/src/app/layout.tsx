@@ -12,6 +12,7 @@ import {
 } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Databuddy } from "@databuddy/sdk/react";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const figtreeHeading = Figtree({
   subsets: ["latin"],
@@ -72,12 +73,14 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body className="font-sans" suppressHydrationWarning>
-        <StackProvider app={stackServerApp}>
-          <StackTheme>
-            <Providers>{children}</Providers>
-          </StackTheme>
-        </StackProvider>
-        <Databuddy clientId="" />
+        <TooltipProvider>
+          <StackProvider app={stackServerApp}>
+            <StackTheme>
+              <Providers>{children}</Providers>
+            </StackTheme>
+          </StackProvider>
+          <Databuddy clientId="" />
+        </TooltipProvider>
       </body>
     </html>
   );
