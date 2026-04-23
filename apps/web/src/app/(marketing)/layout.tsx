@@ -1,4 +1,4 @@
-import { MarketingFooter } from "@/components/marketing/Footer";
+import { Footer } from "@/components/marketing/Footer";
 import { MarketingNavbar } from "@/components/marketing/Navbar";
 
 export default function MarketingLayout({
@@ -10,7 +10,7 @@ export default function MarketingLayout({
     <div className="marketing-shell flex min-h-screen w-full flex-col items-center bg-background selection:bg-primary selection:text-primary-foreground">
       <MarketingNavbar />
       <main className="flex-1 w-full">{children}</main>
-      <MarketingFooter />
+      <Footer />
     </div>
   );
 }
