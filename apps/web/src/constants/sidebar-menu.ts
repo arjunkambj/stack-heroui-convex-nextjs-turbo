@@ -14,36 +14,47 @@ export const sidebarMainItems: MenuItem[] = [
   {
     name: "Overview",
     href: "/overview",
-    icon: "solar:dashboard-linear",
+    icon: "solar:home-2-linear",
   },
 ]
 
 export const sidebarCategories: MenuCategory[] = [
   {
-    name: "Tracking",
-    icon: "solar:chart-linear",
+    name: "Socials",
+    icon: "solar:global-linear",
     items: [
       {
-        name: "Tracked Accounts",
-        href: "/tracking/accounts",
-        icon: "solar:user-circle-linear",
+        name: "Accounts",
+        href: "/socials/accounts",
+        icon: "solar:users-group-two-rounded-linear",
       },
       {
-        name: "Tracked Videos",
-        href: "/tracking/videos",
-        icon: "solar:video-camera-linear",
+        name: "Videos",
+        href: "/socials/videos",
+        icon: "solar:clapperboard-linear",
       },
+    ],
+  },
+  {
+    name: "Links",
+    icon: "solar:link-circle-linear",
+    items: [
       {
-        name: "Tracking Links",
-        href: "/tracking/links",
+        name: "Manage Links",
+        href: "/links",
         icon: "solar:link-linear",
+      },
+      {
+        name: "Analytics",
+        href: "/analytics",
+        icon: "solar:chart-linear",
       },
     ],
   },
 ]
 
-export const sidebarFooterItems: MenuItem[] = [ 
-    {
+export const sidebarFooterItems: MenuItem[] = [
+  {
     name: "Teams",
     href: "/teams",
     icon: "solar:users-group-rounded-linear",
@@ -53,5 +64,16 @@ export const sidebarFooterItems: MenuItem[] = [
     href: "/settings",
     icon: "solar:settings-linear",
   },
-
 ]
+
+// Map routes to breadcrumb-friendly labels
+export const routeLabels: Record<string, string> = {
+  "/overview": "Overview",
+  "/socials": "Socials",
+  "/socials/accounts": "Accounts",
+  "/socials/videos": "Videos",
+  "/links": "Links",
+  "/analytics": "Analytics",
+  "/teams": "Teams",
+  "/settings": "Settings",
+}

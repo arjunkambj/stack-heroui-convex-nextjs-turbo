@@ -30,34 +30,49 @@ export function UserProfile() {
         .slice(0, 2)
     : user?.primaryEmail?.[0]?.toUpperCase() || "U"
 
+  const displayName = user?.displayName || user?.primaryEmail?.split("@")[0] || "User"
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <SidebarMenuButton size="lg" tooltip="Profile">
-          <Avatar className="h-8 w-8 rounded-lg">
-            <AvatarImage src={user?.profileImageUrl || undefined} alt="User" />
-            <AvatarFallback className="rounded-lg">{initials}</AvatarFallback>
+        <SidebarMenuButton size="lg" tooltip={displayName} className="hover:bg-sidebar-accent">
+          <Avatar className="size-7 rounded-lg">
+            <AvatarImage src={user?.profileImageUrl || undefined} alt={displayName} />
+            <AvatarFallback className="rounded-lg text-xs font-medium">
+              {initials}
+            </AvatarFallback>
           </Avatar>
           <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-semibold">
-              {user?.displayName || user?.primaryEmail?.split("@")[0] || "User"}
+            <span className="truncate font-medium text-sidebar-foreground">
+              {displayName}
             </span>
-            <span className="truncate text-xs text-muted-foreground">
+            <span className="truncate text-xs text-sidebar-foreground/50">
               {user?.primaryEmail || "user@example.com"}
             </span>
           </div>
+          <Icon icon="solar:alt-arrow-up-linear" className="ml-auto size-3.5 text-sidebar-foreground/40" />
         </SidebarMenuButton>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuContent
+        align="end"
+        side="top"
+        className="w-56"
+        sideOffset={8}
+      >
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col gap-1">
+            <p className="text-sm font-medium">{displayName}</p>
+            <p className="text-xs text-muted-foreground">{user?.primaryEmail}</p>
+          </div>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Icon icon="lucide:user" />
+          <Icon icon="solar:user-circle-linear" className="size-4" />
           Profile
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="text-destructive" onClick={handleLogout}>
-          <Icon icon="lucide:log-out" />
+          <Icon icon="solar:logout-2-linear" className="size-4" />
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

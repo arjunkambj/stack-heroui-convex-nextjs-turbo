@@ -37,9 +37,9 @@ export default function Home() {
       <Divider />
       <Testimonial />
       <Divider />
-      <Faq />
-      <Divider />
       <Pricing />
+      <Divider />
+      <Faq />
     </>
   );
 }

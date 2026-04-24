@@ -52,7 +52,7 @@ const Faq = () => {
             Common Questions
           </h2>
           <p className="mt-3 sm:mt-4 max-w-2xl mx-auto text-center text-base sm:text-lg text-muted-foreground">
-            We&apos;re here to help you get the most out of Meyoo.
+            We&apos;re here to help you get the most out of Unifeed.
           </p>
         </div>
         <div className="grid gap-8 md:grid-cols-2">

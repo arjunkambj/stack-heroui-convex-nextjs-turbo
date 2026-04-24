@@ -43,13 +43,10 @@ const howItWorks = [
 
 const HowItWorks = () => {
   const logos: IntegrationLogo[] = [
-    { icon: "logos:shopify", name: "Shopify", className: "" },
-    { icon: "logos:meta-icon", name: "Meta Ads", className: "" },
-    { icon: "logos:google-ads", name: "Google Ads", className: "" },
-    { icon: "logos:tiktok-icon", name: "TikTok Ads", className: "" },
-    { icon: "ri:snapchat-fill", name: "Snapchat Ads", className: "text-[#FFFC00]" },
-    { icon: "logos:twitter", name: "Twitter Ads", className: "" },
-    { icon: "logos:google-analytics", name: "Google Analytics", className: "" },
+    { icon: "logos:instagram-icon", name: "Instagram", className: "" },
+    { icon: "logos:tiktok-icon", name: "TikTok", className: "" },
+    { icon: "logos:twitter", name: "Twitter", className: "" },
+    { icon: "logos:youtube-icon", name: "YouTube", className: "" },
   ];
 
   return (
@@ -74,26 +71,26 @@ const HowItWorks = () => {
             {logos.map((logo, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center gap-3.5 rounded-full bg-gradient-to-br from-muted/60 to-muted/40 px-6 py-3 backdrop-blur-md ring-1 ring-default-100 transition-all duration-200 hover:scale-105 hover:ring-primary/30"
+                className="flex items-center gap-2.5 rounded-lg border border-border/60 bg-muted/30 px-4 py-2.5"
               >
                 {"image" in logo ? (
                   <Image
                     alt={logo.name}
-                    className={cn("size-6", logo.className)}
-                    height={24}
+                    className={cn("size-5", logo.className)}
+                    height={20}
                     src={logo.image as string}
                     unoptimized
-                    width={24}
+                    width={20}
                   />
                 ) : (
                   <Icon
                     icon={logo.icon}
-                    width={24}
-                    height={24}
+                    width={20}
+                    height={20}
                     className={cn(logo.className)}
                   />
                 )}
-                <p className="text-base font-medium">{logo.name}</p>
+                <span className="text-sm font-medium text-foreground">{logo.name}</span>
               </div>
             ))}
           </Marquee>
@@ -105,23 +102,28 @@ const HowItWorks = () => {
           {howItWorks.map((feature, index) => (
           <PinContainer
             key={index}
-            className="bg-gradient-to-br from-muted/40 to-muted/20 border border-border/20 group w-full rounded-3xl p-1.5 transition-all duration-300 hover:scale-[1.02]"
+            className="bg-gradient-to-br from-muted/40 to-muted/20 border border-border/20 group w-full rounded-3xl p-1.5 transition-all duration-300"
           >
             <div className="flex flex-col h-full">
               <div className={cn("relative overflow-hidden rounded-[20px] bg-gradient-to-br from-primary/10 via-primary/5 to-transparent", feature.imageOrder)}>
                 <div className="h-64 w-full sm:h-72 flex items-center justify-center">
                   <Icon
                     icon={feature.icon}
-                    className="text-primary/40 group-hover:text-primary/60 transition-all duration-500 ease-out group-hover:scale-110"
+                    className="text-primary/40 group-hover:text-primary/60 transition-colors duration-500"
                     width={120}
                     height={120}
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm rounded-full px-4 py-1.5">
-                  <p className="text-xs uppercase tracking-[0.15em] text-primary font-semibold">
-                    Step {feature.number}
-                  </p>
+                <div className="absolute top-4 left-4">
+                  <div className="inline-flex items-center gap-1.5 rounded-lg bg-background border border-border px-2 py-1">
+                    <span className="text-xs font-bold text-primary">
+                      {feature.number}
+                    </span>
+                    <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-medium">
+                      Step
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className={`mt-5 w-full p-4 flex-1 ${feature.contentOrder}`}>
