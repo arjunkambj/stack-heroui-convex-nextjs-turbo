@@ -64,10 +64,10 @@ const featureData: FeatureCard[] = [
 const Feature = () => {
   return (
     <section
-      className="relative flex w-full items-center justify-center overflow-hidden py-20 sm:py-24 lg:py-28"
+      className="relative flex w-full flex-col items-center justify-center overflow-hidden py-20 sm:py-24 lg:py-28"
     >
       <div
-        className="container mx-auto px-4 sm:px-6 lg:px-8 flex w-full flex-col items-center justify-center"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl"
       >
         <div className="inline-flex items-center gap-2 mb-2 sm:mb-3 px-0 py-0 text-primary/80">
           <span className="text-sm uppercase tracking-[0.15em] font-medium text-primary/70">
@@ -81,7 +81,7 @@ const Feature = () => {
           Powerful features designed specifically for social media tracking. Monitor every account that matters and make data-driven decisions with confidence.
         </p>
 
-        <div className="mx-auto mt-16 grid w-full max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-16 grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {featureData.map((item) => (
             <article
               key={item.id}

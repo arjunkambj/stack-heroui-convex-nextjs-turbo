@@ -22,29 +22,26 @@ const d2cBrands = [
 const Hero = () => {
   return (
     <section
-      className="relative w-full min-h-[calc(90vh)] flex items-center justify-center overflow-hidden mt-13 pb-16 sm:pb-20 lg:pb-24 2xl:pb-28"
+      className="relative w-full flex items-center justify-center overflow-hidden py-20 sm:py-24 lg:py-28"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 flex flex-col gap-12 sm:gap-16">
         <div className="grid grid-cols-1 gap-12 sm:gap-14 lg:gap-16 items-center">
           {/* Left Column - Text Content */}
           <div className="text-center flex flex-col items-center px-2 sm:px-0">
             {/* Header  */}
             <h1 className="flex flex-col gap-4 font-semibold tracking-tight  text-pretty text-7xl mb-6">
               <span className="block text-balance text-default-900">
-                See, Track
+                Track any account across all socials
               </span>
 
               <span className="block text-balance text-default-900">
-                <span>and{` `}</span>
-                <span className="text-primary">Grow Your Audience</span>
-              </span>
-              <span className="block text-5xl mt-2 text-default-900 font-playfair italic ">
-                For every creator. Every platform.
+                <span>in one{` `}</span>
+                <span className="text-primary">synced dashboard</span>
               </span>
             </h1>
 
             {/* Professional info */}
-            <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed text-pretty text-center max-w-xl mx-auto mb-0">
+            <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed text-pretty text-center max-w-xl mx-auto mb-0">
               Unifeed tracks all your creators, competitors, and campaigns across TikTok, Instagram, YouTube, and X — no passwords required.
             </p>
 
@@ -96,9 +93,9 @@ const Hero = () => {
               duration: 0.9,
               delay: 0.1,
             }}
-            className="relative flex justify-center lg:justify-end px-2 sm:px-0"
+            className="relative flex justify-center px-2 sm:px-0"
           >
-            <Card className="relative h-[320px] shadow-none w-full max-w-[720px] rounded-2xl sm:rounded-3xl bg-gradient-to-br from-muted/40 to-muted/20 p-1 sm:p-1.5 backdrop-blur-sm sm:h-[420px] md:h-[560px] lg:h-[640px] ring-1 ring-border">
+            <Card className="relative h-[320px] shadow-none w-full max-w-[850px] rounded-2xl sm:rounded-3xl bg-gradient-to-br from-muted/40 to-muted/20 p-1 sm:p-1.5 backdrop-blur-sm sm:h-[420px] md:h-[560px] lg:h-[640px] ring-1 ring-border">
               <CardContent className="relative size-full rounded-[16px] sm:rounded-[20px] bg-gradient-to-br from-background via-background to-muted/10 overflow-hidden p-0">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-secondary/5 pointer-events-none z-10" />
                 {/* Light mode preview */}
@@ -123,7 +120,7 @@ const Hero = () => {
         </div>
 
         <div className="mt-20">
-          <div className="mx-auto w-full max-w-7xl px-2 sm:px-4">
+          <div className="mx-auto w-full">
             <p className="text-center text-xs sm:text-sm text-muted-foreground mb-6 sm:mb-8">
               Trusted by brands and creators.
             </p>
@@ -131,7 +128,7 @@ const Hero = () => {
               {d2cBrands.map((brand) => (
                 <div
                   key={brand.name}
-                  className="flex items-center justify-center  transition-all duration-200 hover:opacity-100 hover:scale-105"
+                  className="flex items-center justify-center transition-all duration-200 hover:opacity-100 hover:scale-105"
                 >
                   <Image
                     alt={`${brand.name} logo`}

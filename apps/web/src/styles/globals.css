@@ -263,12 +263,6 @@
 }
 
 @layer components {
-  .marketing-shell .container {
-    width: 100%;
-    max-width: none;
-    margin-inline: auto;
-  }
-
   .marketing-section-kicker {
     @apply text-[0.68rem] font-bold tracking-[0.22em] uppercase text-primary;
   }

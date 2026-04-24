@@ -56,7 +56,7 @@ const HowItWorks = () => {
     <section
       className="relative flex w-full flex-col items-center justify-center py-20 sm:py-24 lg:py-28"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 mb-2 sm:mb-3 px-0 py-0 text-primary/80">
             <span className="text-sm uppercase tracking-[0.15em] font-medium text-primary/70">
@@ -100,9 +100,9 @@ const HowItWorks = () => {
           <div className="pointer-events-none absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
           <div className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-background via-background/80 to-transparent"></div>
         </div>
-      </div>
-      <div className="relative mx-auto mt-20 grid min-h-[28rem] w-full max-w-7xl items-stretch gap-8 px-4 sm:px-6 lg:px-8 md:grid-cols-2 lg:grid-cols-3">
-        {howItWorks.map((feature, index) => (
+
+        <div className="relative mx-auto mt-20 grid min-h-[28rem] w-full items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {howItWorks.map((feature, index) => (
           <PinContainer
             key={index}
             className="bg-gradient-to-br from-muted/40 to-muted/20 border border-border/20 group w-full rounded-3xl p-1.5 transition-all duration-300 hover:scale-[1.02]"
@@ -135,6 +135,7 @@ const HowItWorks = () => {
             </div>
           </PinContainer>
         ))}
+      </div>
       </div>
     </section>
   );

@@ -48,31 +48,31 @@ const Testimonial = () => {
     <section
       className="relative flex w-full flex-col items-center justify-center py-20 sm:py-24 lg:py-28"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 mb-2 sm:mb-3 px-0 py-0 text-primary/80">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-col gap-12 sm:gap-16">
+        <div className="flex flex-col items-center text-center">
+          <div className="inline-flex items-center gap-2 mb-1 sm:mb-1.5 px-0 py-0 text-primary/80">
             <span className="text-sm uppercase tracking-[0.15em] font-medium text-primary/70">
               Testimonial
             </span>
           </div>
+          <h2 className="text-center text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight leading-tight">What customers say</h2>
+          <p className="mt-3 sm:mt-4 max-w-2xl mx-auto text-center text-base sm:text-lg text-muted-foreground">Loved by operators and teams.</p>
         </div>
-        <h2 className="text-center text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight leading-tight">What customers say</h2>
-        <p className="mt-6 sm:mt-8 max-w-2xl mx-auto text-center text-base sm:text-lg text-muted-foreground">Loved by operators and teams.</p>
-      </div>
-      <div
-        className={`relative mx-auto mt-16 grid w-full max-w-7xl items-stretch gap-8 px-4 sm:px-6 lg:px-8 md:grid-cols-2 lg:grid-cols-3`}
-      >
+
+        <div
+          className="relative mx-auto grid w-full items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
         {testimonials.map((testimonial) => (
           <article
             key={testimonial.id}
-            className="bg-gradient-to-br from-muted/40 to-muted/20 border border-border/20 group relative flex h-full flex-col rounded-3xl p-1.5 transition-all duration-300 hover:scale-[1.02]"
+            className="bg-gradient-to-br from-muted/40 to-muted/20 border border-border/20 group relative flex h-full flex-col rounded-3xl p-1.5 transition-all duration-300 hover:border-border/40"
           >
             <div className="relative flex h-full flex-col p-6 sm:p-8">
-              <div className="mb-5 inline-flex size-10 items-center justify-center rounded-full text-primary/70">
-                <Icon icon="ri:double-quotes-l" width={26} />
+              <div className="mb-5 inline-flex size-12 items-center justify-center rounded-full text-primary transition-colors">
+                <Icon icon="ri:double-quotes-l" width={28} />
               </div>
 
-              <h3 className="mb-3 text-xl font-semibold tracking-tight leading-tight">
+              <h3 className="mb-3 text-xl font-semibold tracking-tight leading-tight group-hover:text-primary/90 transition-colors">
                 {testimonial.title}
               </h3>
 
@@ -83,11 +83,13 @@ const Testimonial = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <Avatar className="h-10 w-10">
+                <Avatar className="h-11 w-11 ring-2 ring-border ring-offset-2 ring-offset-background transition-all group-hover:ring-primary/30">
                   <AvatarImage src={testimonial.user.avatar} alt={testimonial.user.name} />
-                  <AvatarFallback>{testimonial.user.name.charAt(0)}</AvatarFallback>
+                  <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                    {testimonial.user.name.charAt(0)}
+                  </AvatarFallback>
                 </Avatar>
-                <div className="space-y-1">
+                <div className="space-y-0.5">
                   <p className="text-sm font-semibold">
                     {testimonial.user.name}
                   </p>
@@ -99,6 +101,7 @@ const Testimonial = () => {
             </div>
           </article>
         ))}
+        </div>
       </div>
     </section>
   );

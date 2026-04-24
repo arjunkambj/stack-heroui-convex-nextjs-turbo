@@ -1,73 +1,96 @@
 "use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    question: "What is Unifeed and why is it useful?",
+    question: "How does Meyoo calculate profit?",
     answer:
-      "Unifeed is a social media tracking platform that lets you monitor any creator, competitor, or campaign across TikTok, Instagram, YouTube, and X without requiring passwords or account access.",
+      "We combine revenue with product cost (COGS), shipping, discounts, transaction fees, refunds, and ad spend to show true profit by order, SKU, and campaign.",
   },
   {
-    question: "Why should I use Unifeed for social media tracking?",
+    question: "What do I need to get started?",
     answer:
-      "Unifeed provides instant insights on engagement rates, follower growth, content performance, and viral trends. It helps you stay ahead of competitors and optimize your content strategy.",
+      "Connect Shopify and your ad channels. Add product costs (upload or edit inline). You’ll see profit start to populate right away.",
   },
   {
-    question: "How do I effectively track accounts with Unifeed?",
+    question: "Which integrations are available?",
     answer:
-      "Simply paste any profile URL from TikTok, Instagram, YouTube, or X. Unifeed will automatically start tracking engagement, content performance, and growth metrics in real-time.",
+      "Shopify, Meta Ads, Google Ads, TikTok Ads, Snapchat, and Google Analytics—with more coming soon.",
   },
   {
-    question: "What are the benefits of using Unifeed for social media analytics?",
+    question: "Can I export my data?",
     answer:
-      "Unifeed provides immediate insights on trending content, best posting times, and audience preferences. It helps you make data-driven decisions to grow your audience faster.",
+      "Yes. Export CSVs or copy to clipboard for quick shares. (API and scheduled exports on Growth+ plans.)",
+  },
+  {
+    question: "Is my data secure?",
+    answer:
+      "We use modern encryption and strict access controls. Your data is yours—we never sell it. (Add your formal security/legal language here.)",
+  },
+  {
+    question: "Can I cancel anytime?",
+    answer: "Absolutely. Manage your plan from your account settings with one click.",
   },
 ];
 
-interface FaqProps {
-  className?: string;
-}
-
-const Faq = ({ className }: FaqProps) => {
+const Faq = () => {
   return (
-    <section className={cn("py-20 sm:py-24 lg:py-28", className)}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-2">
+    <section
+      id="faq"
+      className="relative py-20 sm:py-24 lg:py-28 w-full scroll-mt-24"
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-col gap-12 sm:gap-16">
+        <div className="flex flex-col items-center text-center">
+          <div className="inline-flex items-center gap-2 mb-1 sm:mb-1.5 px-0 py-0 text-primary/80">
+            <span className="text-sm uppercase tracking-[0.15em] font-medium text-primary/70">
+              FAQ
+            </span>
+          </div>
+          <h2 className="text-center text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight leading-tight">
+            Common Questions
+          </h2>
+          <p className="mt-3 sm:mt-4 max-w-2xl mx-auto text-center text-base sm:text-lg text-muted-foreground">
+            We&apos;re here to help you get the most out of Meyoo.
+          </p>
+        </div>
+        <div className="grid gap-8 md:grid-cols-2">
           <div className="flex flex-col gap-6">
-            <h2 className="text-4xl font-semibold">
-              Need Help?
-              <br />
-              <span className="text-muted-foreground/70">
-                We&apos;re here to assist.
-              </span>
-            </h2>
-            <p className="text-lg text-muted-foreground md:text-xl">
-              Still have questions? Feel free to contact our friendly
-              <Link href="mailto:hey@unifeed.io" className="mx-1 whitespace-nowrap underline">
+            <h3 className="text-2xl font-semibold tracking-tight">
+              Need personalized help?
+            </h3>
+            <p className="text-base text-muted-foreground">
+              Drop a note to our
+              <a
+                href="mailto:hey@meyoo.io"
+                className="mx-1 whitespace-nowrap underline text-primary hover:text-primary/80 transition-colors"
+              >
                 support team
-              </Link>
-              specialists.
+              </a>
+              and we&apos;ll point you in the right direction.
             </p>
-            <Button size="lg" variant="outline" className="w-fit">
-              View all FAQs
+            <Button
+              asChild
+              size="lg"
+              className="w-full sm:w-fit"
+            >
+              <a href="mailto:hey@meyoo.io">
+                Email hey@meyoo.io
+              </a>
             </Button>
           </div>
-          <Accordion type="multiple">
-            {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left">
+          <Accordion type="single" collapsible className="w-full border-0">
+            {faqs.map((faq) => (
+              <AccordionItem key={faq.question} value={faq.question}>
+                <AccordionTrigger className="text-base">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
+                <AccordionContent>
+                  <p className="leading-relaxed text-muted-foreground">
+                    {faq.answer}
+                  </p>
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>

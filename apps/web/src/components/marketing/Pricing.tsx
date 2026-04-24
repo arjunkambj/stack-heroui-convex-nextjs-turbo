@@ -23,51 +23,65 @@ const pricingTiers = [
   {
     key: "starter",
     title: "Starter",
-    description: "For individual creators",
-    price: { monthly: "$19", yearly: "$15" },
-    period: { monthly: "/month", yearly: "/month" },
-    buttonText: "Start free trial",
-    buttonVariant: "default" as const,
-    href: "/signin",
-    features: [
-      "Track up to 25 accounts",
-      "Basic analytics",
-      "Email support",
-      "7-day data history",
-    ],
-  },
-  {
-    key: "growth",
-    description: "For growing teams",
+    description: "Perfect for small teams and individual creators getting started.",
     price: { monthly: "$49", yearly: "$39" },
     period: { monthly: "/month", yearly: "/month" },
-    buttonText: "Start free trial",
+    buttonText: "Get Started",
     buttonVariant: "default" as const,
     href: "/signin",
     features: [
-      "Track up to 100 accounts",
-      "Advanced analytics",
-      "AI-powered insights",
-      "Priority support",
-      "30-day data history",
+      "Unlimited tracked accounts",
+      "Up to 150 videos",
+      "24-hour data refresh",
+      "Creator portals",
+      "Contract management",
+      "2 team seats",
+      "Email support",
     ],
   },
   {
-    key: "scale",
-    title: "Scale",
-    description: "For agencies and enterprises",
-    price: { monthly: "$149", yearly: "$119" },
+    key: "pro",
+    title: "Pro",
+    description: "For growing brands scaling their creator campaigns.",
+    price: { monthly: "$99", yearly: "$79" },
     period: { monthly: "/month", yearly: "/month" },
-    buttonText: "Start free trial",
+    buttonText: "Get Started",
+    buttonVariant: "default" as const,
+    href: "/signin",
+    popular: true,
+    features: [
+      "Starter features, plus:",
+      "Unlimited tracked accounts",
+      "Up to 1,000 videos",
+      "24-hour data refresh",
+      "Revenue tracking & attribution",
+      "Creator campaigns",
+      "Creator portals",
+      "Contract management",
+      "5 team seats",
+      "Priority support",
+    ],
+  },
+  {
+    key: "ultra",
+    title: "Ultra",
+    description: "For agencies and large teams with high-volume needs.",
+    price: { monthly: "$299", yearly: "$239" },
+    period: { monthly: "/month", yearly: "/month" },
+    buttonText: "Get Started",
     buttonVariant: "default" as const,
     href: "/signin",
     features: [
-      "Unlimited accounts",
-      "Enterprise analytics",
-      "Custom integrations",
-      "Dedicated support",
+      "Pro features, plus:",
+      "Unlimited tracked accounts",
+      "Up to 5,000 videos",
+      "12-hour data refresh",
+      "Revenue tracking & attribution",
+      "Creator campaigns",
+      "15 team seats",
       "API access",
-      "Unlimited data history",
+      "Dedicated account manager",
+      "Custom integrations",
     ],
   },
 ];
@@ -95,9 +109,9 @@ const Pricing = () => {
       id="pricing"
       className="relative py-20 sm:py-24 lg:py-28 w-full"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-8 sm:gap-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12 sm:gap-16">
         <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 mb-2 sm:mb-3 px-0 py-0 text-primary/80">
+          <div className="inline-flex items-center gap-2 mb-1 sm:mb-1.5 px-0 py-0 text-primary/80">
             <span className="text-sm uppercase tracking-[0.15em] font-medium text-primary/70">
               Plans
             </span>
@@ -105,7 +119,7 @@ const Pricing = () => {
           <h2 className="text-center text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight leading-tight">
             Simple, transparent pricing
           </h2>
-          <p className="mt-6 sm:mt-8 max-w-2xl mx-auto text-center text-base sm:text-lg text-muted-foreground">
+          <p className="mt-3 sm:mt-4 max-w-2xl mx-auto text-center text-base sm:text-lg text-muted-foreground">
             Start free for 14 days. Scale as you grow. Cancel anytime.
           </p>
         </div>
@@ -157,14 +171,24 @@ const Pricing = () => {
               >
                 <CardHeader className="flex flex-col gap-3 py-5 px-6 bg-background rounded-[20px]">
                   <div className="text-center space-y-1.5">
-                    <h3 className="text-lg font-semibold tracking-tight text-foreground">
-                      {tier.title}
-                    </h3>
+                    <div className="flex items-center justify-center gap-2">
+                      <h3 className="text-lg font-semibold tracking-tight text-foreground">
+                        {tier.title}
+                      </h3>
+                      {"popular" in tier && tier.popular && (
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-success bg-success/10 px-2 py-0.5 rounded-full">
+                          Most Popular
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs leading-relaxed text-muted-foreground">
                       {tier.description}
                     </p>
                   </div>
                   <div className="flex flex-col items-center gap-1 py-2">
+                    <span className="text-xs font-medium text-muted-foreground">
+                      Starts at
+                    </span>
                     <div className="flex items-end gap-1.5 text-4xl font-bold tracking-tight text-foreground">
                       {shouldAnimate ? (
                         <>
@@ -187,11 +211,15 @@ const Pricing = () => {
                     <div className="text-xs text-muted-foreground font-medium">
                       {periodCopy}
                     </div>
+                    <span className="text-xs font-medium text-muted-foreground">
+                      Billed {billingCycle === "monthly" ? "monthly" : "yearly"}
+                    </span>
                   </div>
 
                   <Button
                     asChild
-                    className="w-full h-10 font-semibold transition-all duration-200"
+                    size="lg"
+                    className="w-full font-semibold h-11 sm:h-12 transition-all duration-200 active:scale-100 text-sm sm:text-base"
                     variant={tier.buttonVariant}
                   >
                     <Link href={tier.href}>

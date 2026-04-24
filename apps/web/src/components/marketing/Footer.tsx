@@ -51,11 +51,11 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <section className="relative pt-20 pb-16 sm:pt-24">
+    <section className="relative w-full pt-20 pb-16 sm:pt-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <footer>
           {/* CTA Section */}
-          <div className="mb-16 sm:mb-24 rounded-2xl max-w-7xl mx-auto p-8 sm:p-10 md:p-12 lg:p-16 transition-all duration-300 bg-gradient-to-br from-muted/40 to-muted/20 border border-border/20">
+          <div className="mb-16 sm:mb-24 mx-auto max-w-5xl rounded-2xl w-full p-8 sm:p-10 md:p-12 lg:p-16 transition-all duration-300 bg-gradient-to-br from-muted/40 to-muted/20 border border-border/20">
             <div className="flex flex-col items-center text-center gap-5">
               <h2 className="max-w-[700px] text-2xl leading-tight font-semibold tracking-tight text-balance sm:text-3xl lg:text-4xl text-foreground">
                 Revolutionize social media tracking with Unifeed.
@@ -94,7 +94,7 @@ const Footer = () => {
           </div>
 
           {/* Navigation Section */}
-          <nav className="border-border grid grid-cols-1 gap-y-8 border-b border-t py-10 sm:gap-y-10 lg:grid-cols-[0.4fr_0.6fr] lg:gap-x-16 lg:py-16 max-w-7xl mx-auto">
+          <nav className="border-border grid grid-cols-1 gap-y-8 border-b border-t py-10 sm:gap-y-10 lg:grid-cols-[0.4fr_0.6fr] lg:gap-x-16 lg:py-16 w-full">
             <div className="max-w-sm">
               <Logo />
               <p className="mt-4 text-sm sm:text-base text-muted-foreground">
@@ -134,7 +134,7 @@ const Footer = () => {
           </nav>
 
           {/* Bottom Section */}
-          <div className="mx-auto mt-4 pt-8 max-w-7xl">
+          <div className="w-full mt-4 pt-8">
             <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
               <p className="text-sm sm:text-base text-muted-foreground">
                 © 2025 Unifeed Inc. All rights reserved.
