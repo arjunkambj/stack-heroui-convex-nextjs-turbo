@@ -1,0 +1,25 @@
+{
+	"name": "next-hero-stack-convex-starter",
+	"private": true,
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"type": "module",
+	"scripts": {
+		"dev": "turbo dev",
+		"build": "turbo build",
+		"check-types": "turbo check-types",
+		"dev:web": "turbo -F web dev",
+		"dev:server": "turbo -F @repo/backend dev",
+		"dev:setup": "turbo -F @repo/backend dev:setup",
+		"check": "biome check --write ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.2.0",
+		"@repo/config": "workspace:*",
+		"turbo": "^2.8.12",
+		"typescript": "catalog:"
+	},
+	"packageManager": "pnpm@10.33.2"
+}
