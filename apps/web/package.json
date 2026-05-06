@@ -1,28 +1,31 @@
 {
-	"name": "web",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev --port 3001",
-		"build": "next build",
-		"start": "next start"
-	},
-	"dependencies": {
-		"@repo/backend": "workspace:*",
-		"babel-plugin-react-compiler": "^1.0.0",
-		"convex": "catalog:",
-		"next": "^16.2.0",
-		"next-themes": "catalog:",
-		"react": "catalog:",
-		"react-dom": "catalog:"
-	},
-	"devDependencies": {
-		"@repo/config": "workspace:*",
-		"@tailwindcss/postcss": "^4.1.18",
-		"@types/node": "^20",
-		"@types/react": "catalog:",
-		"@types/react-dom": "catalog:",
-		"tailwindcss": "catalog:",
-		"typescript": "catalog:"
-	}
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@heroui/react": "^3.0.3",
+    "@heroui/styles": "^3.0.3",
+    "@repo/backend": "workspace:*",
+    "@stackframe/stack": "^2.8.85",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "convex": "catalog:",
+    "next": "^16.2.0",
+    "next-themes": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/config": "workspace:*",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^20",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  }
 }

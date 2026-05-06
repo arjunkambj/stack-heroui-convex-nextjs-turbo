@@ -1,19 +1,20 @@
 {
-	"name": "@repo/backend",
-	"version": "1.0.0",
-	"description": "",
-	"license": "ISC",
-	"author": "",
-	"scripts": {
-		"dev": "convex dev",
-		"dev:setup": "convex dev --configure --until-success"
-	},
-	"dependencies": {
-		"convex": "catalog:"
-	},
-	"devDependencies": {
-		"@repo/config": "workspace:*",
-		"@types/node": "^24.3.0",
-		"typescript": "catalog:"
-	}
+  "name": "@repo/backend",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "scripts": {
+    "dev": "convex dev",
+    "dev:setup": "convex dev --configure --until-success"
+  },
+  "dependencies": {
+    "@stackframe/stack": "^2.8.85",
+    "convex": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/config": "workspace:*",
+    "@types/node": "^24.3.0",
+    "typescript": "catalog:"
+  }
 }
