@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import { fixupPluginRules } from "@eslint/compat";
 import { globalIgnores } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier";
 import tseslint from "typescript-eslint";
@@ -7,6 +8,8 @@ import pluginReact from "eslint-plugin-react";
 import globals from "globals";
 import pluginNext from "@next/eslint-plugin-next";
 import { config as baseConfig } from "./base.js";
+
+const reactRecommended = pluginReact.configs.flat.recommended;
 
 /**
  * A custom ESLint configuration for libraries that use Next.js.
@@ -26,9 +29,13 @@ export const nextJsConfig = [
     "next-env.d.ts",
   ]),
   {
-    ...pluginReact.configs.flat.recommended,
+    ...reactRecommended,
+    plugins: {
+      ...reactRecommended.plugins,
+      react: fixupPluginRules(pluginReact),
+    },
     languageOptions: {
-      ...pluginReact.configs.flat.recommended.languageOptions,
+      ...reactRecommended.languageOptions,
       globals: {
         ...globals.serviceworker,
       },
@@ -36,7 +43,7 @@ export const nextJsConfig = [
   },
   {
     plugins: {
-      "@next/next": pluginNext,
+      "@next/next": fixupPluginRules(pluginNext),
     },
     rules: {
       ...pluginNext.configs.recommended.rules,
@@ -45,7 +52,7 @@ export const nextJsConfig = [
   },
   {
     plugins: {
-      "react-hooks": pluginReactHooks,
+      "react-hooks": fixupPluginRules(pluginReactHooks),
     },
     settings: { react: { version: "detect" } },
     rules: {

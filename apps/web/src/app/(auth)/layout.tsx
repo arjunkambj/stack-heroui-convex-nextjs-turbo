@@ -1,13 +1,21 @@
 import type React from "react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import Logo from "@/components/layout/Logo";
+import { stackServerApp } from "@/stack/server";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default async function AuthLayout({ children }: AuthLayoutProps) {
+  const user = await stackServerApp.getUser();
+
+  if (user) {
+    redirect("/overview");
+  }
+
   return (
     <div className="min-h-dvh bg-background flex flex-col p-2 lg:p-4 lg:grid lg:grid-cols-2">
       <aside className="relative hidden h-full overflow-hidden rounded-3xl bg-gradient-to-br from-accent/[0.025] via-surface to-accent/[0.035] text-foreground lg:flex">
