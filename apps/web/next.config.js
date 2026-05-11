@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactCompiler: true,
   images: {
     remotePatterns: [
       {
@@ -40,6 +41,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "placehold.co",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "framerusercontent.com",
         pathname: "/**",
       },
     ],

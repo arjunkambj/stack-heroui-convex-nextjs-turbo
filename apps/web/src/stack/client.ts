@@ -1,8 +1,26 @@
 import { StackClientApp } from "@stackframe/stack";
 
+const stackProjectId = process.env.NEXT_PUBLIC_STACK_PROJECT_ID;
+const stackPublishableClientKey =
+  process.env.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY;
+
+if (!stackProjectId) {
+  throw new Error("Missing NEXT_PUBLIC_STACK_PROJECT_ID");
+}
+
+if (!stackPublishableClientKey) {
+  throw new Error("Missing NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY");
+}
 
 export const stackClientApp = new StackClientApp({
   tokenStore: "cookie",
-  projectId: process.env.NEXT_PUBLIC_STACK_PROJECT_ID,
-  publishableClientKey: process.env.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY,
+  projectId: stackProjectId,
+  publishableClientKey: stackPublishableClientKey,
+  urls: {
+    handler: "/handler",
+    signIn: "/sign-in",
+    afterSignIn: "/overview",
+    afterSignUp: "/overview",
+    afterSignOut: "/",
+  },
 });

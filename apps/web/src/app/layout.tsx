@@ -6,13 +6,10 @@ import { stackServerApp } from "@/stack/server";
 import {
   Bricolage_Grotesque,
   Plus_Jakarta_Sans,
-  Nunito_Sans,
   Inter,
   Figtree,
 } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { Databuddy } from "@databuddy/sdk/react";
-import { TooltipProvider } from "@/components/ui/tooltip";
 
 const figtreeHeading = Figtree({
   subsets: ["latin"],
@@ -62,25 +59,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(
-        bricolage.variable,
-        appSans.variable,
-        "font-sans",
-        inter.variable,
-        figtreeHeading.variable,
-      )}
+      className={`${bricolage.variable} ${appSans.variable} font-sans ${inter.variable} ${figtreeHeading.variable}`}
       suppressHydrationWarning
       data-scroll-behavior="smooth"
     >
       <body className="font-sans" suppressHydrationWarning>
-        <TooltipProvider>
-          <StackProvider app={stackServerApp}>
-            <StackTheme>
-              <Providers>{children}</Providers>
-            </StackTheme>
-          </StackProvider>
-          <Databuddy clientId="" />
-        </TooltipProvider>
+        <StackProvider app={stackServerApp}>
+          <StackTheme>
+            <Providers>{children}</Providers>
+          </StackTheme>
+        </StackProvider>
+        <Databuddy clientId="" />
       </body>
     </html>
   );

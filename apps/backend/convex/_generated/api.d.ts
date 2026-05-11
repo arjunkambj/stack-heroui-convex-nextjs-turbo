@@ -8,13 +8,8 @@
  * @module
  */
 
-import type * as core_users from "../core/users.js";
 import type * as http from "../http.js";
-import type * as lib_auth from "../lib/auth.js";
-import type * as payments from "../payments.js";
-import type * as subscriptions from "../subscriptions.js";
 import type * as users from "../users.js";
-import type * as webhooks_stack from "../webhooks/stack.js";
 
 import type {
   ApiFromModules,
@@ -23,13 +18,8 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  "core/users": typeof core_users;
   http: typeof http;
-  "lib/auth": typeof lib_auth;
-  payments: typeof payments;
-  subscriptions: typeof subscriptions;
   users: typeof users;
-  "webhooks/stack": typeof webhooks_stack;
 }>;
 
 /**
@@ -58,4 +48,6 @@ export declare const internal: FilterApi<
   FunctionReference<any, "internal">
 >;
 
-export declare const components: {};
+export declare const components: {
+  stack_auth: import("@stackframe/stack/_generated/component.js").ComponentApi<"stack_auth">;
+};

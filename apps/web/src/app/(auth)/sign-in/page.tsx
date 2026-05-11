@@ -3,15 +3,7 @@
 import { useStackApp } from "@stackframe/stack";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
-import { Separator } from "@/components/ui/separator";
+import { Button, Input, InputOTP, Spinner } from "@heroui/react";
 
 export default function SignInPage() {
   const app = useStackApp();
@@ -24,6 +16,7 @@ export default function SignInPage() {
   const [isVerifying, setIsVerifying] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
+  const [message, setMessage] = useState("");
 
   const handleSendMagicLink = async (
     source: "initial" | "resend" = "initial",
@@ -33,25 +26,28 @@ export default function SignInPage() {
     }
 
     if (!email) {
-      toast.error("Please enter your email address.");
+      setMessage("Please enter your email address.");
       return;
     }
 
     setIsEmailLoading(true);
+    setMessage("");
 
     try {
-      const result = await app.sendMagicLinkEmail(email);
+      const result = await app.sendMagicLinkEmail(email, {
+        callbackUrl: `${window.location.origin}${app.urls.magicLinkCallback}`,
+      });
       if (result.status === "error") {
-        toast.error("Could not send verification code. Please try again.");
+        setMessage("Could not send verification code. Please try again.");
       } else {
         setNonce(result.data.nonce);
         setOtp("");
         setStep("otp");
         setResendCooldown(20);
-        toast.success("Verification code sent! Check your email.");
+        setMessage("Verification code sent. Check your email.");
       }
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      setMessage("Something went wrong. Please try again.");
     } finally {
       setIsEmailLoading(false);
     }
@@ -75,11 +71,11 @@ export default function SignInPage() {
       try {
         const result = await app.signInWithMagicLink(otp + nonce);
         if (result.status === "error") {
-          toast.error("Invalid code. Please try again.");
+          setMessage("Invalid code. Please try again.");
           setOtp("");
         }
       } catch {
-        toast.error("Something went wrong. Please try again.");
+        setMessage("Something went wrong. Please try again.");
         setOtp("");
       } finally {
         setIsVerifying(false);
@@ -95,7 +91,7 @@ export default function SignInPage() {
         <h1 className="font-display text-2xl font-bold tracking-tight text-foreground">
           Welcome to Unifeed
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground font-light">
+        <p className="mt-2 text-sm text-muted font-light">
           {step === "email"
             ? "Enter your email to continue"
             : `We sent a code to ${email}`}
@@ -113,7 +109,7 @@ export default function SignInPage() {
           <div className="relative">
             <Icon
               icon="solar:letter-linear"
-              className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
+              className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted"
             />
             <Input
               type="email"
@@ -121,43 +117,49 @@ export default function SignInPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              fullWidth
+              variant="secondary"
               className="h-10 text-base pl-10"
             />
           </div>
 
-          <Button type="submit" disabled={isEmailLoading} size="lg">
-            {isEmailLoading ? (
-              <Icon icon="svg-spinners:180-ring-with-bg" width={18} />
-            ) : null}
+          <Button
+            type="submit"
+            isDisabled={isEmailLoading}
+            size="lg"
+            fullWidth
+            className="font-normal"
+          >
+            {isEmailLoading ? <Spinner size="sm" /> : null}
             {isEmailLoading ? "Sending..." : "Continue with Email"}
           </Button>
         </form>
       ) : (
         <div className="flex flex-col items-center gap-5 pt-1">
-          <p className="text-center text-sm text-stone-500 font-light">
+          <p className="text-center text-sm text-muted font-light">
             Enter the 6-character code from your email
           </p>
           <InputOTP
             maxLength={6}
             value={otp}
             onChange={(value) => setOtp(value.toUpperCase())}
-            disabled={isVerifying}
-            containerClassName="w-full justify-center gap-3"
+            isDisabled={isVerifying}
+            className="w-full justify-center gap-3"
           >
-            <InputOTPGroup>
+            <InputOTP.Group>
               {[0, 1, 2, 3, 4, 5].map((index) => (
-                <InputOTPSlot key={index} index={index} />
+                <InputOTP.Slot key={index} index={index} />
               ))}
-            </InputOTPGroup>
+            </InputOTP.Group>
           </InputOTP>
           {isVerifying ? (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Icon icon="svg-spinners:180-ring-with-bg" width={16} />{" "}
+            <div className="flex items-center gap-2 text-sm text-muted">
+              <Spinner size="sm" />
               Verifying...
             </div>
           ) : null}
           <div className="flex flex-col items-center gap-2 text-sm">
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted">
               {resendCooldown > 0
                 ? `Resend available in ${resendCooldown}s`
                 : "Didn't get the code?"}
@@ -167,11 +169,11 @@ export default function SignInPage() {
                 type="button"
                 disabled={isEmailLoading || resendCooldown > 0}
                 onClick={() => void handleSendMagicLink("resend")}
-                className="hover:text-primary transition-colors"
+                className="font-medium"
               >
                 {isEmailLoading ? "Sending..." : "Resend code"}
               </button>
-              <span className="text-muted-foreground">|</span>
+              <span className="text-muted">|</span>
               <button
                 type="button"
                 onClick={() => {
@@ -180,7 +182,7 @@ export default function SignInPage() {
                   setNonce("");
                   setResendCooldown(0);
                 }}
-                className="hover:text-primary transition-colors"
+                className="font-medium"
               >
                 Use a different email
               </button>
@@ -189,31 +191,37 @@ export default function SignInPage() {
         </div>
       )}
 
+      {message ? (
+        <p className="rounded-lg border border-border bg-surface-secondary/60 px-3 py-2 text-center text-sm text-muted">
+          {message}
+        </p>
+      ) : null}
+
       <div className="flex items-center gap-3">
-        <Separator className="flex-1 bg-border" />
-        <span className="text-xs text-muted-foreground font-medium">OR</span>
-        <Separator className="flex-1 bg-border" />
+        <span className="h-px flex-1 bg-border" />
+        <span className="text-xs text-muted font-medium">OR</span>
+        <span className="h-px flex-1 bg-border" />
       </div>
 
       <Button
-        variant="secondary"
-        disabled={isGoogleLoading}
+        variant="tertiary"
+        isDisabled={isGoogleLoading}
         size="lg"
-        onClick={async () => {
+        fullWidth
+        className="font-normal"
+        onPress={async () => {
           setIsGoogleLoading(true);
-          await app.signInWithOAuth("google");
+          await app.signInWithOAuth("google", {
+            returnTo: app.urls.afterSignIn,
+          });
           setIsGoogleLoading(false);
         }}
       >
-        {isGoogleLoading ? (
-          <Icon icon="svg-spinners:180-ring-with-bg" width={18} />
-        ) : (
-          <Icon icon="logos:google-icon" width={18} />
-        )}
+        {isGoogleLoading ? <Spinner size="sm" /> : <Icon icon="logos:google-icon" width={18} />}
         {isGoogleLoading ? "Redirecting..." : "Continue with Google"}
       </Button>
 
-      <p className="text-center text-xs text-muted-foreground">
+      <p className="text-center text-xs text-muted">
         &copy; {new Date().getFullYear()} Unifeed. All rights reserved.
       </p>
     </div>

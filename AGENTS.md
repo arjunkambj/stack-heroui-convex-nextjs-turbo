@@ -1,6 +1,6 @@
 # Unifeed — Agent Context
 
-Compact Turborepo (pnpm): Next.js 16 landing app + Convex backend, Stack Auth, shadcn/ui.
+Compact Turborepo (pnpm): Next.js 16 landing app + Convex backend, Stack Auth, HeroUI, Iconify.
 
 ## Monorepo boundaries
 
@@ -42,8 +42,7 @@ Convex deployment vars are already committed in `.env` files (not secret), but d
 ## Web app (`apps/web`) specifics
 
 - **Tailwind v4** via `@tailwindcss/postcss` in `postcss.config.mjs`. No traditional `tailwind.config.js`.
-- **shadcn/ui** — `style: "radix-luma"`, `iconLibrary: "hugeicons"`, aliases: `@/components/ui`, `@/lib`, `@/hooks`.
-  - `components.json` registries: `@shadcnblocks` (needs `SHADCNBLOCKS_API_KEY`) and `@magicui`.
+- **HeroUI v3 + Iconify** — use `@heroui/react`, `@heroui/styles`, and `@iconify/react` for web UI.
 - **Route groups**: `(marketing)` (landing), `(auth)` (`/sign-in`, `/handler/[...stack]`), `(dashboard)` (`/overview`, `/tracking/*`, `/teams`, `/settings`).
 - **Auth wiring**: `src/stack/server.ts` (server-only `StackServerApp`), `src/stack/client.ts` (`StackClientApp`). `src/proxy.ts` exists but is not wired as Next.js middleware yet.
 - **Convex client**: uses `NEXT_PUBLIC_CONVEX_URL` from the committed `.env`.

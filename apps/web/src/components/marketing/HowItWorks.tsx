@@ -1,173 +1,110 @@
 "use client";
 
-import React from "react";
+import { motion } from "motion/react";
 
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { Marquee } from "@/components/ui/marquee";
-import { Icon } from "@iconify/react";
+const cardContainerVariants = {
+  animate: {
+    transition: { staggerChildren: 0.1 },
+  },
+  initial: {},
+};
 
-type IntegrationLogo =
-  | { name: string; className?: string; icon: string; image?: never }
-  | { name: string; className?: string; icon?: never; image: string };
+const cardVariants = {
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeInOut" as const },
+    y: 0,
+  },
+  initial: { opacity: 0, scale: 0.95, y: 30 },
+};
 
-const howItWorks = [
+const steps = [
   {
-    number: "01",
-    title: "Add accounts to track",
     description:
-      "Simply paste any TikTok, Instagram, YouTube, or X profile URL. No passwords or access required — just the username.",
-    icon: "solar:user-plus-bold-duotone",
-    imageOrder: "order-1",
-    contentOrder: "order-2",
+      "Add public creator profiles, campaign details, deliverables, and the links you want to attribute.",
+    step: "1",
+    title: "Set up your creator roster",
   },
   {
-    number: "02",
-    title: "Get instant analytics",
     description:
-      "See engagement rates, follower growth, content performance, and viral trends in real-time across all platforms.",
-    icon: "solar:chart-bold-duotone",
-    imageOrder: "order-2",
-    contentOrder: "order-1",
+      "Unifeed keeps social performance, link clicks, contract status, and campaign data in sync.",
+    step: "2",
+    title: "Track every moving part",
   },
   {
-    number: "03",
-    title: "Track competitors & campaigns",
     description:
-      "Monitor your competitors' strategies and track influencer campaigns to identify what works and what doesn't.",
-    icon: "solar:users-group-rounded-bold-duotone",
-    imageOrder: "order-1",
-    contentOrder: "order-2",
+      "See what is working, renew top creators, and share clean campaign reports with your team.",
+    step: "3",
+    title: "Act on the signal",
   },
-];
+] as const;
 
-const HowItWorks = () => {
-  const logos: IntegrationLogo[] = [
-    { icon: "logos:instagram-icon", name: "Instagram", className: "" },
-    { icon: "logos:tiktok-icon", name: "TikTok", className: "" },
-    { icon: "logos:twitter", name: "Twitter", className: "" },
-    { icon: "logos:youtube-icon", name: "YouTube", className: "" },
-  ];
-
+export function HowItWorks() {
   return (
-    <section
-      className="relative flex w-full flex-col items-center justify-center py-20 sm:py-24 lg:py-28"
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 mb-2 sm:mb-3 px-0 py-0 text-primary/80">
-            <span className="text-sm uppercase tracking-[0.15em] font-medium text-primary/70">
-              How It Works
-            </span>
-          </div>
-        </div>
-        <h2 className="text-center text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight leading-tight">How Unifeed Works</h2>
-        <p className="mt-6 sm:mt-8 max-w-2xl mx-auto text-center text-base sm:text-lg text-muted-foreground">
-          Start tracking in three simple steps: add accounts, unlock insights, and make better decisions to grow your audience.
-        </p>
-
-        <div className="relative mt-16">
-          <Marquee pauseOnHover className="[--duration:25s]">
-            {logos.map((logo, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-2.5 rounded-lg border border-border/60 bg-muted/30 px-4 py-2.5"
-              >
-                {"image" in logo ? (
-                  <Image
-                    alt={logo.name}
-                    className={cn("size-5", logo.className)}
-                    height={20}
-                    src={logo.image as string}
-                    unoptimized
-                    width={20}
-                  />
-                ) : (
-                  <Icon
-                    icon={logo.icon}
-                    width={20}
-                    height={20}
-                    className={cn(logo.className)}
-                  />
-                )}
-                <span className="text-sm font-medium text-foreground">{logo.name}</span>
-              </div>
-            ))}
-          </Marquee>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-background via-background/80 to-transparent"></div>
-        </div>
-
-        <div className="relative mx-auto mt-20 grid min-h-[28rem] w-full items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {howItWorks.map((feature, index) => (
-          <PinContainer
-            key={index}
-            className="bg-gradient-to-br from-muted/40 to-muted/20 border border-border/20 group w-full rounded-3xl p-1.5 transition-all duration-300"
-          >
-            <div className="flex flex-col h-full">
-              <div className={cn("relative overflow-hidden rounded-[20px] bg-gradient-to-br from-primary/10 via-primary/5 to-transparent", feature.imageOrder)}>
-                <div className="h-64 w-full sm:h-72 flex items-center justify-center">
-                  <Icon
-                    icon={feature.icon}
-                    className="text-primary/40 group-hover:text-primary/60 transition-colors duration-500"
-                    width={120}
-                    height={120}
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                <div className="absolute top-4 left-4">
-                  <div className="inline-flex items-center gap-1.5 rounded-lg bg-background border border-border px-2 py-1">
-                    <span className="text-xs font-bold text-primary">
-                      {feature.number}
-                    </span>
-                    <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-medium">
-                      Step
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className={`mt-5 w-full p-4 flex-1 ${feature.contentOrder}`}>
-                <h2 className="mb-3 text-xl font-semibold tracking-tight leading-tight">
-                  {feature.title}
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            </div>
-          </PinContainer>
+    <section className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-4 py-24">
+      <div className="flex flex-col items-center gap-2 text-center">
+        <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+          Process
+        </span>
+        <h2 className="text-4xl font-bold leading-tight">How it works</h2>
+        <span className="text-lg leading-relaxed text-muted">
+          Three simple steps from scattered creator work to a clear operating
+          system.
+        </span>
+      </div>
+      <motion.div
+        className="grid grid-cols-1 gap-6 md:grid-cols-3"
+        initial="initial"
+        variants={cardContainerVariants}
+        viewport={{ amount: 0.3, once: true }}
+        whileInView="animate"
+      >
+        {steps.map((step) => (
+          <motion.div key={step.step} variants={cardVariants}>
+            <Card
+              description={step.description}
+              step={step.step}
+              title={step.title}
+            />
+          </motion.div>
         ))}
-      </div>
-      </div>
+      </motion.div>
     </section>
   );
-};
+}
 
-export { HowItWorks };
-
-export const PinContainer = ({
-  children,
+const Card = ({
   title,
-  className,
-  containerClassName,
+  description,
+  step,
 }: {
-  children: React.ReactNode;
-  title?: string;
-  className?: string;
-  containerClassName?: string;
-}) => {
-  return (
-    <div className={cn("relative h-full ", containerClassName)}>
-      <div className={cn("relative h-full flex flex-col", className)}>
-        {children}
+  title: string;
+  description: string;
+  step: string;
+}) => (
+  <div className="flex h-full w-full flex-col gap-6 rounded-[2rem] border border-border/50 bg-surface p-2">
+    <div className="flex h-70 w-full items-end rounded-[1.5rem] bg-background p-5">
+      <div className="grid w-full grid-cols-4 gap-2">
+        {[32, 58, 76, 44].map((height, index) => (
+          <div
+            className="flex h-36 items-end rounded-full bg-surface-secondary"
+            key={height + index}
+          >
+            <div
+              className="w-full rounded-full bg-accent"
+              style={{ height: `${height}%` }}
+            />
+          </div>
+        ))}
       </div>
-      {title && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-          <span className="bg-zinc-950 text-white text-xs font-bold px-4 py-0.5 rounded-full ring-1 ring-white/10">
-            {title}
-          </span>
-        </div>
-      )}
     </div>
-  );
-};
+    <div className="flex flex-col gap-2 px-2 pb-6">
+      <div className="mr-auto rounded-2xl bg-background px-3 py-0.5 text-sm font-semibold">
+        Step {step}
+      </div>
+      <h3 className="text-xl font-medium">{title}</h3>
+      <p className="text-sm text-muted">{description}</p>
+    </div>
+  </div>
+);

@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "@stackframe/stack": "2.8.80",
-    "convex": "^1.34.1",
-    "svix": "^1.90.0"
+    "convex": "^1.34.1"
   }
 }

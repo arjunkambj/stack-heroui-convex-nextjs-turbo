@@ -10,8 +10,8 @@ interface AuthLayoutProps {
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="min-h-dvh bg-background flex flex-col p-2 lg:p-4 lg:grid lg:grid-cols-2">
-      <aside className="relative hidden h-full overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 via-card to-primary/10 text-foreground lg:flex">
-        <div className="relative flex w-full flex-col p-10">
+      <aside className="relative hidden h-full overflow-hidden rounded-3xl bg-gradient-to-br from-accent/[0.025] via-surface to-accent/[0.035] text-foreground lg:flex">
+        <div className="relative flex w-full flex-col p-6">
           <HomeLink />
         </div>
       </aside>

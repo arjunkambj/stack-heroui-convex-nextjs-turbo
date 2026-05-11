@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 
 import { Hero } from "@/components/marketing/Hero";
-import { Feature } from "@/components/marketing/Feature";
-import Divider from "@/components/marketing/Divider";
+import { Navbar } from "@/components/marketing/Navbar";
 import { HowItWorks } from "@/components/marketing/HowItWorks";
-import { Testimonial } from "@/components/marketing/Testimonial";
-import { Faq } from "@/components/marketing/FAQ";
+import { Footer } from "@/components/marketing/Footer";
+import { FAQ } from "@/components/marketing/FAQ";
+import { Features } from "@/components/marketing/Feature";
+import { Testimonitals } from "@/components/marketing/Testimonial";
 import { Pricing } from "@/components/marketing/Pricing";
+import { MarketingMarquee } from "@/components/marketing/MarketingMarquee";
+import { WhyUS } from "@/components/marketing/WhyUS";
 
 export const metadata: Metadata = {
   title: "Unifeed | Track Any Account Across All Socials",
@@ -28,18 +31,20 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
-      <Hero />
-      <Divider />
+    <main className="motion-landing flex w-full flex-col bg-background">
+      <div className="relative">
+        <div className="pointer-events-none absolute inset-0 bg-[url('/mainbg.avif')] bg-cover bg-center bg-no-repeat" />
+        <Navbar />
+        <Hero />
+      </div>
+      <MarketingMarquee />
+      <Features />
+      <WhyUS />
       <HowItWorks />
-      <Divider />
-      <Feature />
-      <Divider />
-      <Testimonial />
-      <Divider />
+      <Testimonitals />
       <Pricing />
-      <Divider />
-      <Faq />
-    </>
+      <FAQ />
+      <Footer />
+    </main>
   );
 }

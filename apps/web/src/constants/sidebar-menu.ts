@@ -14,40 +14,45 @@ export const sidebarMainItems: MenuItem[] = [
   {
     name: "Overview",
     href: "/overview",
-    icon: "solar:home-2-linear",
+    icon: "hugeicons:home-03",
   },
 ]
 
 export const sidebarCategories: MenuCategory[] = [
   {
     name: "Socials",
-    icon: "solar:global-linear",
+    icon: "hugeicons:global",
     items: [
       {
         name: "Accounts",
         href: "/socials/accounts",
-        icon: "solar:users-group-two-rounded-linear",
+        icon: "hugeicons:user-group",
       },
       {
         name: "Videos",
         href: "/socials/videos",
-        icon: "solar:clapperboard-linear",
+        icon: "hugeicons:video-01",
+      },
+      {
+        name: "Trends",
+        href: "/socials/trends",
+        icon: "hugeicons:trending-up-down",
       },
     ],
   },
   {
     name: "Links",
-    icon: "solar:link-circle-linear",
+    icon: "hugeicons:link-circle",
     items: [
       {
         name: "Manage Links",
         href: "/links",
-        icon: "solar:link-linear",
+        icon: "hugeicons:link-03",
       },
       {
         name: "Analytics",
         href: "/analytics",
-        icon: "solar:chart-linear",
+        icon: "hugeicons:chart-line-data-01",
       },
     ],
   },
@@ -55,14 +60,19 @@ export const sidebarCategories: MenuCategory[] = [
 
 export const sidebarFooterItems: MenuItem[] = [
   {
+    name: "Agent & API",
+    href: "/agent-api",
+    icon: "hugeicons:ai-programming",
+  },
+  {
     name: "Teams",
     href: "/teams",
-    icon: "solar:users-group-rounded-linear",
+    icon: "hugeicons:user-group-03",
   },
   {
     name: "Settings",
     href: "/settings",
-    icon: "solar:settings-linear",
+    icon: "hugeicons:settings-02",
   },
 ]
 
@@ -72,8 +82,10 @@ export const routeLabels: Record<string, string> = {
   "/socials": "Socials",
   "/socials/accounts": "Accounts",
   "/socials/videos": "Videos",
+  "/socials/trends": "Trends",
   "/links": "Links",
   "/analytics": "Analytics",
+  "/agent-api": "Agent & API",
   "/teams": "Teams",
   "/settings": "Settings",
 }

@@ -1,135 +1,120 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Icon } from "@iconify/react"
-import { sidebarMainItems, sidebarCategories, sidebarFooterItems } from "@/constants/sidebar-menu"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Icon } from "@iconify/react";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarSeparator,
-  useSidebar,
-} from "@/components/ui/sidebar"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import { UserProfile } from "./UserProfile"
-import Logo from "./Logo"
+  sidebarMainItems,
+  sidebarCategories,
+  sidebarFooterItems,
+} from "@/constants/sidebar-menu";
+import Logo from "./Logo";
 
-export function AppSidebar() {
-  const pathname = usePathname()
-  const { state } = useSidebar()
-  const isCollapsed = state === "collapsed"
+type SidebarItem = {
+  name: string;
+  href: string;
+  icon: string;
+};
+
+type SidebarSection = {
+  name?: string;
+  items: SidebarItem[];
+};
+
+const collapsedRailSlot =
+  "mx-auto flex size-10 items-center justify-center px-0";
+
+const NavItem = ({
+  item,
+  active,
+  collapsed,
+}: {
+  item: SidebarItem;
+  active: boolean;
+  collapsed: boolean;
+}) => (
+  <Link
+    href={item.href}
+    title={collapsed ? item.name : undefined}
+    className={`flex items-center gap-3 rounded-[0.75rem] text-sm transition-colors ${
+      collapsed ? collapsedRailSlot : "h-9 px-3"
+    } ${active ? "bg-accent/10 font-medium" : "hover:bg-surface-secondary"}`}
+  >
+    <Icon
+      icon={item.icon}
+      className={`size-[18px] shrink-0 ${active ? "[stroke-width:2]" : ""}`}
+    />
+    {!collapsed && <span>{item.name}</span>}
+  </Link>
+);
+
+export function AppSidebar({ collapsed }: { collapsed: boolean }) {
+  const pathname = usePathname();
+  const sections: SidebarSection[] = [
+    { items: sidebarMainItems },
+    ...sidebarCategories.map(({ name, items }) => ({ name, items })),
+  ];
 
   return (
-    <Sidebar collapsible="icon" className="border-r-0">
-      <SidebarHeader>
-        <div className="flex h-14 items-center px-3">
-          <Logo />
+    <aside
+      className={`sticky top-0 flex h-dvh px-1 shrink-0 flex-col bg-background transition-[width] duration-200 ${
+        collapsed ? "w-16" : "w-62"
+      }`}
+    >
+      <div
+        className={`mt-2 flex h-16 items-center ${
+          collapsed ? "justify-center px-0" : "px-3"
+        }`}
+      >
+        <div
+          className={`overflow-hidden${collapsed ? " flex size-10 items-center justify-center" : ""}`}
+        >
+          <Logo
+            className={collapsed ? "justify-center" : undefined}
+            markOnly={collapsed}
+          />
         </div>
-      </SidebarHeader>
+      </div>
 
-      <SidebarContent className="px-2">
-        {/* Main navigation items */}
-        <SidebarMenu>
-          {sidebarMainItems.map((item) => (
-            <SidebarMenuItem key={item.name}>
-              <SidebarMenuButton
-                asChild
-                tooltip={item.name}
-                isActive={pathname === item.href}
-              >
-                <Link href={item.href}>
-                  <Icon icon={item.icon} className="size-[18px]" />
-                  <span>{item.name}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
+      <div
+        className={`flex-1 overflow-y-auto py-3 ${collapsed ? "px-0" : "px-2"}`}
+      >
+        {sections.map((section, index) => (
+          <section
+            key={section.name ?? "main"}
+            className={index === 0 ? "" : "pt-4"}
+          >
+            {section.name && !collapsed && (
+              <div className="px-3 pb-1.5 text-xs font-medium uppercase tracking-wider text-muted">
+                {section.name}
+              </div>
+            )}
+            <nav className="space-y-1">
+              {section.items.map((item) => (
+                <NavItem
+                  key={item.name}
+                  item={item}
+                  active={pathname === item.href}
+                  collapsed={collapsed}
+                />
+              ))}
+            </nav>
+          </section>
+        ))}
+      </div>
 
-        {/* Collapsible category groups */}
-        {sidebarCategories.map((category) => {
-          const isCategoryActive = category.items.some((item) =>
-            pathname.startsWith(item.href)
-          )
-
-          return (
-            <Collapsible
-              key={category.name}
-              defaultOpen={isCategoryActive || true}
-              className="group/collapsible"
-            >
-              <SidebarGroup className="p-0 py-1">
-                <SidebarGroupLabel asChild>
-                  <CollapsibleTrigger className="flex w-full items-center gap-2 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-sidebar-foreground/50 hover:text-sidebar-foreground/70 transition-colors">
-                    <span className="flex-1 text-left">{category.name}</span>
-                    {!isCollapsed && (
-                      <Icon
-                        icon="solar:alt-arrow-down-linear"
-                        className="size-3.5 transition-transform duration-200 group-data-[state=closed]/collapsible:rotate-[-90deg]"
-                      />
-                    )}
-                  </CollapsibleTrigger>
-                </SidebarGroupLabel>
-                <CollapsibleContent>
-                  <SidebarGroupContent>
-                    <SidebarMenu>
-                      {category.items.map((item) => (
-                        <SidebarMenuItem key={item.name}>
-                          <SidebarMenuButton
-                            asChild
-                            tooltip={item.name}
-                            isActive={pathname === item.href}
-                          >
-                            <Link href={item.href}>
-                              <Icon icon={item.icon} className="size-[18px]" />
-                              <span>{item.name}</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      ))}
-                    </SidebarMenu>
-                  </SidebarGroupContent>
-                </CollapsibleContent>
-              </SidebarGroup>
-            </Collapsible>
-          )
-        })}
-      </SidebarContent>
-
-      <SidebarFooter>
-        <SidebarSeparator />
-        <SidebarMenu>
+      <div className="border-t border-border p-2">
+        <nav className="space-y-1">
           {sidebarFooterItems.map((item) => (
-            <SidebarMenuItem key={item.name}>
-              <SidebarMenuButton
-                asChild
-                tooltip={item.name}
-                isActive={pathname === item.href}
-              >
-                <Link href={item.href}>
-                  <Icon icon={item.icon} className="size-[18px]" />
-                  <span>{item.name}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <NavItem
+              key={item.name}
+              item={item}
+              active={pathname === item.href}
+              collapsed={collapsed}
+            />
           ))}
-        </SidebarMenu>
-        <SidebarSeparator />
-        <UserProfile />
-      </SidebarFooter>
-    </Sidebar>
-  )
+        </nav>
+      </div>
+    </aside>
+  );
 }

@@ -1,9 +1,9 @@
-import { Spinner } from "@/components/ui/spinner";
+import { Icon } from "@iconify/react";
 
 export default function Loading() {
   return (
     <div className="flex h-dvh items-center justify-center bg-background">
-      <Spinner className="size-6" />
+      <Icon icon="svg-spinners:180-ring-with-bg" className="size-6 text-accent" />
     </div>
   );
 }

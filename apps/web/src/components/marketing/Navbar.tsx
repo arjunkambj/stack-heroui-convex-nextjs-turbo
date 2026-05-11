@@ -1,83 +1,71 @@
 "use client";
 
+import { Button } from "@heroui/react";
 import Link from "next/link";
-import { useState } from "react";
-import { Icon } from "@iconify/react";
+import { motion } from "motion/react";
+
 import Logo from "@/components/layout/Logo";
-import { Button } from "@/components/ui/button";
+
+const navVariants = {
+  animate: {
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeInOut" as const },
+    y: 0,
+  },
+  initial: { opacity: 0, y: -20 },
+};
+
+const navItemVariants = {
+  animate: {
+    opacity: 1,
+    transition: { duration: 0.4, ease: "easeInOut" as const },
+    y: 0,
+  },
+  initial: { opacity: 0, y: -10 },
+};
 
 const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "Pricing", href: "#pricing" },
-];
+  { href: "/", name: "Home" },
+  { href: "#features", name: "Features" },
+  { href: "#pricing", name: "Pricing" },
+] as const;
 
-export function MarketingNavbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
+export function Navbar() {
   return (
-    <header className="fixed top-4 left-1/2 z-50 w-full max-w-5xl -translate-x-1/2">
-      <nav className="flex items-center justify-between rounded-2xl border border-border/50 bg-background/80 px-5 py-3">
-        <Link href="/">
-          <Logo className="shrink-0" />
-        </Link>
-
-        <ul className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <Link
-                href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className="hidden md:block">
-          <Button asChild>
-            <Link href="/sign-in">Get Started</Link>
-          </Button>
-        </div>
-
-        <button
-          className="inline-flex items-center justify-center rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:hidden"
-          onClick={() => setMobileOpen((prev) => !prev)}
-          aria-label="Toggle menu"
+    <motion.div
+      className="sticky top-3 z-50 mx-4 mt-4 rounded-4xl bg-white/50 backdrop-blur-lg sm:mx-auto sm:w-[min(64rem,calc(100%-2rem))]"
+      initial="initial"
+      variants={navVariants}
+      viewport={{ once: true }}
+      whileInView="animate"
+    >
+      <nav className="mx-auto flex max-w-7xl items-center justify-between bg-transparent px-4 py-3">
+        <motion.div variants={navItemVariants}>
+          <Logo />
+        </motion.div>
+        <motion.ul
+          className="hidden items-center gap-10 sm:flex"
+          variants={{
+            animate: { transition: { staggerChildren: 0.08 } },
+            initial: {},
+          }}
         >
-          <Icon
-            icon={
-              mobileOpen
-                ? "solar:close-circle-linear"
-                : "solar:hamburger-menu-linear"
-            }
-            width={22}
-          />
-        </button>
+          {navLinks.map((link) => (
+            <motion.li
+              className="text-sm font-medium hover:cursor-pointer hover:text-accent"
+              key={link.name}
+              variants={navItemVariants}
+            >
+              <Link href={link.href}>{link.name}</Link>
+            </motion.li>
+          ))}
+        </motion.ul>
+        <motion.div variants={navItemVariants}>
+          <Link href="/sign-in">
+            <Button size="sm">Get Started</Button>
+          </Link>
+        </motion.div>
       </nav>
-
-      {mobileOpen && (
-        <div className="mt-2 rounded-2xl border border-border/50 bg-background/95 p-4  backdrop-blur-xl md:hidden">
-          <ul className="flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  className="block rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-3 border-t border-border pt-3">
-            <Button size="sm" className="w-full" asChild>
-              <Link href="/sign-in">Get Started</Link>
-            </Button>
-          </div>
-        </div>
-      )}
-    </header>
+    </motion.div>
   );
 }

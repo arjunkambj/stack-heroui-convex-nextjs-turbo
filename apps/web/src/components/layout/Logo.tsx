@@ -1,12 +1,11 @@
-import { cn } from "@/lib/utils";
-
 interface LogoProps {
-  className?: string;
+  className?: string
+  markOnly?: boolean
 }
 
-export default function Logo({ className }: LogoProps) {
+export default function Logo({ className, markOnly = false }: LogoProps) {
   return (
-    <div className={cn("flex items-center gap-2.5", className)}>
+    <div className={`flex items-center gap-2.5${className ? ` ${className}` : ""}`}>
       <svg
         viewBox="0 0 40 40"
         fill="currentColor"
@@ -18,9 +17,11 @@ export default function Logo({ className }: LogoProps) {
         {/* Right stroke — shorter with flat top and angled bottom */}
         <path d="M22 14H34V24L22 30V14Z" />
       </svg>
-      <span className="text-lg font-display font-bold tracking-tight text-foreground">
-        Unifeed
-      </span>
+      {!markOnly && (
+        <span className="text-lg font-display font-bold tracking-tight text-foreground">
+          Unifeed
+        </span>
+      )}
     </div>
-  );
+  )
 }
