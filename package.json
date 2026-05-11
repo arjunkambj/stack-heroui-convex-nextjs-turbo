@@ -1,37 +1,20 @@
 {
-	"name": "next-hero-stack-convex-starter",
-	"private": true,
-	"workspaces": {
-		"packages": [
-			"apps/*",
-			"packages/*"
-		],
-		"catalog": {
-			"typescript": "^6",
-			"next-themes": "^0.4.6",
-			"react": "^19.2.3",
-			"react-dom": "^19.2.3",
-			"convex": "^1.33.1",
-			"@types/react": "^19.2.10",
-			"@types/react-dom": "^19.2.3",
-			"tailwindcss": "^4.1.18"
-		}
-	},
-	"type": "module",
-	"scripts": {
-		"dev": "turbo dev",
-		"build": "turbo build",
-		"check-types": "turbo check-types",
-		"dev:web": "turbo -F web dev",
-		"dev:server": "turbo -F @repo/backend dev",
-		"dev:setup": "turbo -F @repo/backend dev:setup",
-		"check": "biome check --write ."
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.2.0",
-		"@repo/config": "workspace:*",
-		"turbo": "^2.8.12",
-		"typescript": "catalog:"
-	},
-	"packageManager": "pnpm@10.33.2"
+  "name": "unifeed",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1",
+    "turbo": "^2.8.17",
+    "typescript": "5.9.2"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  }
 }

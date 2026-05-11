@@ -1,23 +1,54 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "../index.css";
-import Providers from "@/components/providers";
-import { StackProvider } from "@stackframe/stack";
+import "../styles/globals.css";
+import Providers from "@/components/Providers";
+import { StackProvider, StackTheme } from "@stackframe/stack";
 import { stackServerApp } from "@/stack/server";
+import {
+  Bricolage_Grotesque,
+  Plus_Jakarta_Sans,
+  Inter,
+  Figtree,
+} from "next/font/google";
+import { Databuddy } from "@databuddy/sdk/react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const figtreeHeading = Figtree({
   subsets: ["latin"],
+  variable: "--font-heading",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const appSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-app-sans",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "next-hero-stack-convex-starter",
-  description: "next-hero-stack-convex-starter",
+  title: "Unifeed | Track Any Account Across All Socials",
+  description:
+    "Unifeed tracks all your creators, competitors, and campaigns across TikTok, Instagram, YouTube, and X — no passwords required.",
+  icons: {
+    icon: "/icon.svg",
+  },
+  openGraph: {
+    title: "Unifeed | Track Any Account Across All Socials",
+    description:
+      "Unifeed tracks all your creators, competitors, and campaigns across TikTok, Instagram, YouTube, and X — no passwords required.",
+    siteName: "Unifeed",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Unifeed | Track Any Account Across All Socials",
+    description:
+      "Unifeed tracks all your creators, competitors, and campaigns across TikTok, Instagram, YouTube, and X — no passwords required.",
+  },
 };
 
 export default function RootLayout({
@@ -26,13 +57,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-dvh w-full`}
-      >
+    <html
+      lang="en"
+      className={`${bricolage.variable} ${appSans.variable} font-sans ${inter.variable} ${figtreeHeading.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="font-sans" suppressHydrationWarning>
         <StackProvider app={stackServerApp}>
-          <Providers>{children}</Providers>
+          <StackTheme>
+            <Providers>{children}</Providers>
+          </StackTheme>
         </StackProvider>
+        <Databuddy clientId="" />
       </body>
     </html>
   );

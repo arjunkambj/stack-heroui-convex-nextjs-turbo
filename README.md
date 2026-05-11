@@ -1,63 +1,52 @@
-# next-hero-stack-convex-starter
+# Unifeed
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines Next.js, Convex, and more.
+Unifeed is a trimmed auth-first prop-firm landing app built with Next.js, Convex, Stack Auth, and Turborepo.
 
-## Features
+## What stays
 
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **Convex** - Reactive backend-as-a-service platform
-- **Turborepo** - Optimized monorepo build system
-- **Biome** - Linting and formatting
+- `apps/web`: landing page plus Stack Auth routes.
+- `apps/backend`: only Convex auth config, `users` schema, Stack webhook sync, and auth/user helpers.
+- `packages/eslint-config` and `packages/typescript-config`: shared workspace config.
 
-## Getting Started
+## Routes
 
-First, install the dependencies:
+- `/`: public landing page.
+- `/sign-in`: authentication entry.
+- `/handler/[...stack]`: Stack Auth handler route.
+
+## Convex scope
+
+- `auth.config.ts`: Stack provider config for Convex auth.
+- `schema.ts`: `users` table only.
+- `http.ts`: Stack webhook route.
+- `webhooks/stack.ts`: syncs `user.created`, `user.updated`, and `user.deleted`.
+- `core/users.ts`: internal webhook upsert/delete mutations.
+- `users.ts`: current-user query.
+- `lib/auth.ts`: auth helpers.
+
+## Local development
 
 ```bash
 pnpm install
+pnpm lint
+pnpm check-types
 ```
 
-## Convex Setup
-
-This project uses Convex as a backend. You'll need to set up Convex before running the app:
+Useful scoped commands:
 
 ```bash
-pnpm run dev:setup
+pnpm --filter @unifeed/web dev
+pnpm --filter @unifeed/backend dev
 ```
 
-Follow the prompts to create a new Convex project and connect it to your application.
+## Required env
 
-Then, run the development server:
+- `NEXT_PUBLIC_STACK_PROJECT_ID`
+- `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`
+- `STACK_SECRET_SERVER_KEY`
+- `STACK_WEBHOOK_SECRET`
 
-```bash
-pnpm run dev
-```
+## Notes
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
-Your app will connect to the Convex cloud backend automatically.
-
-## Git Hooks and Formatting
-
-- Format and lint fix: `pnpm run check`
-
-## Project Structure
-
-```
-next-hero-stack-convex-starter/
-├── apps/
-│   ├── web/         # Frontend application (Next.js)
-├── packages/
-│   ├── backend/     # Convex backend functions and schema
-│   ├── config/      # Shared TypeScript configuration
-```
-
-## Available Scripts
-
-- `pnpm run dev`: Start all applications in development mode
-- `pnpm run build`: Build all applications
-- `pnpm run dev:web`: Start only the web application
-- `pnpm run dev:setup`: Setup and configure your Convex project
-- `pnpm run check-types`: Check TypeScript types across all apps
-- `pnpm run check`: Run Biome formatting and linting
+- The admin app and product flows beyond landing/auth were removed from the active workspace.
+- Do not edit Convex generated files under `apps/backend/convex/_generated`.
