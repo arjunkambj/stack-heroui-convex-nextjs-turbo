@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@heroui/react";
+import { buttonVariants } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { motion } from "motion/react";
 import Link from "next/link";
@@ -66,10 +66,11 @@ export function FooterCTA() {
         workspace.
       </motion.p>
       <motion.div variants={revealItemVariants}>
-        <Link href="/sign-in">
-          <Button className="mt-4" size="lg">
-            Get Started
-          </Button>
+        <Link
+          className={`${buttonVariants({ size: "lg" })} mt-4`}
+          href="/sign-in"
+        >
+          Get Started
         </Link>
       </motion.div>
     </motion.div>

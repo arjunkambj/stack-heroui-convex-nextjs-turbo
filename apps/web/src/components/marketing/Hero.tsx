@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Chip } from "@heroui/react";
+import { buttonVariants, Chip } from "@heroui/react";
 import { motion } from "motion/react";
 import Link from "next/link";
 
@@ -54,13 +54,14 @@ export function Hero() {
           className="flex flex-wrap justify-center gap-3"
           variants={revealItemVariants}
         >
-          <Link href="/sign-in">
-            <Button size="lg">Start tracking</Button>
+          <Link className={buttonVariants({ size: "lg" })} href="/sign-in">
+            Start tracking
           </Link>
-          <Link href="#features">
-            <Button size="lg" variant="ghost">
-              View features
-            </Button>
+          <Link
+            className={buttonVariants({ size: "lg", variant: "ghost" })}
+            href="#features"
+          >
+            View features
           </Link>
         </motion.div>
       </motion.div>
