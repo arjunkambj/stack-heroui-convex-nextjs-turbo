@@ -2,32 +2,60 @@
 
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
+import { motion } from "motion/react";
 import Image from "next/image";
 
 import { whyUsPoints } from "@/constants/landing-page";
+import {
+  revealCardVariants,
+  revealContainerVariants,
+  revealItemVariants,
+  revealViewport,
+} from "@/components/marketing/motion-variants";
 
 export function WhyUS() {
   return (
     <section className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-4 py-24">
-      <div className="flex flex-col items-center gap-2 text-center">
-        <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+      <motion.div
+        className="flex flex-col items-center gap-2 text-center"
+        initial="initial"
+        variants={revealContainerVariants}
+        viewport={revealViewport}
+        whileInView="animate"
+      >
+        <motion.span
+          className="text-sm font-semibold uppercase tracking-wide text-accent"
+          variants={revealItemVariants}
+        >
           Why us
-        </span>
-        <h2 className="text-4xl font-bold leading-tight">Why choose Unifeed</h2>
-        <span className="text-lg leading-relaxed text-muted">
+        </motion.span>
+        <motion.h2
+          className="text-4xl font-bold leading-tight"
+          variants={revealItemVariants}
+        >
+          Why choose Unifeed
+        </motion.h2>
+        <motion.span
+          className="text-lg leading-relaxed text-muted"
+          variants={revealItemVariants}
+        >
           Built for modern creator operations where performance, process, and
           attribution need to live together.
-        </span>
-      </div>
-      <div className="mx-auto flex w-full flex-col gap-8">
+        </motion.span>
+      </motion.div>
+      <motion.div
+        className="mx-auto flex w-full flex-col gap-8"
+        initial="initial"
+        variants={revealContainerVariants}
+        viewport={revealViewport}
+        whileInView="animate"
+      >
         {whyUsPoints.map((point, index) => (
-          <WhyUSCard
-            key={point.title}
-            point={point}
-            reversed={index % 2 === 1}
-          />
+          <motion.div key={point.title} variants={revealCardVariants}>
+            <WhyUSCard point={point} reversed={index % 2 === 1} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

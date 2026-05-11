@@ -2,22 +2,12 @@
 
 import { motion } from "motion/react";
 
-const cardContainerVariants = {
-  animate: {
-    transition: { staggerChildren: 0.1 },
-  },
-  initial: {},
-};
-
-const cardVariants = {
-  animate: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeInOut" as const },
-    y: 0,
-  },
-  initial: { opacity: 0, scale: 0.95, y: 30 },
-};
+import {
+  revealCardVariants,
+  revealContainerVariants,
+  revealItemVariants,
+  revealViewport,
+} from "@/components/marketing/motion-variants";
 
 const steps = [
   {
@@ -43,25 +33,42 @@ const steps = [
 export function HowItWorks() {
   return (
     <section className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-4 py-24">
-      <div className="flex flex-col items-center gap-2 text-center">
-        <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+      <motion.div
+        className="flex flex-col items-center gap-2 text-center"
+        initial="initial"
+        variants={revealContainerVariants}
+        viewport={revealViewport}
+        whileInView="animate"
+      >
+        <motion.span
+          className="text-sm font-semibold uppercase tracking-wide text-accent"
+          variants={revealItemVariants}
+        >
           Process
-        </span>
-        <h2 className="text-4xl font-bold leading-tight">How it works</h2>
-        <span className="text-lg leading-relaxed text-muted">
+        </motion.span>
+        <motion.h2
+          className="text-4xl font-bold leading-tight"
+          variants={revealItemVariants}
+        >
+          How it works
+        </motion.h2>
+        <motion.span
+          className="text-lg leading-relaxed text-muted"
+          variants={revealItemVariants}
+        >
           Three simple steps from scattered creator work to a clear operating
           system.
-        </span>
-      </div>
+        </motion.span>
+      </motion.div>
       <motion.div
         className="grid grid-cols-1 gap-6 md:grid-cols-3"
         initial="initial"
-        variants={cardContainerVariants}
-        viewport={{ amount: 0.3, once: true }}
+        variants={revealContainerVariants}
+        viewport={revealViewport}
         whileInView="animate"
       >
         {steps.map((step) => (
-          <motion.div key={step.step} variants={cardVariants}>
+          <motion.div key={step.step} variants={revealCardVariants}>
             <Card
               description={step.description}
               step={step.step}

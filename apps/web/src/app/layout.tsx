@@ -61,7 +61,6 @@ export default function RootLayout({
       lang="en"
       className={`${bricolage.variable} ${appSans.variable} font-sans ${inter.variable} ${figtreeHeading.variable}`}
       suppressHydrationWarning
-      data-scroll-behavior="smooth"
     >
       <body className="font-sans" suppressHydrationWarning>
         <StackProvider app={stackServerApp}>

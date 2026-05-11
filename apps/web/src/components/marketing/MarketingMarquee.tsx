@@ -1,16 +1,38 @@
 "use client";
 
+import { motion } from "motion/react";
+
 import { brands } from "@/constants/landing-page";
+import {
+  revealContainerVariants,
+  revealItemVariants,
+  revealViewport,
+} from "@/components/marketing/motion-variants";
 
 export function MarketingMarquee() {
   return (
     <section className="w-full overflow-hidden pb-24">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="mb-8 text-center text-2xl font-medium">
+      <motion.div
+        className="mx-auto max-w-6xl"
+        initial="initial"
+        variants={revealContainerVariants}
+        viewport={revealViewport}
+        whileInView="animate"
+      >
+        <motion.h2
+          className="mb-8 text-center text-2xl font-medium"
+          variants={revealItemVariants}
+        >
           Built for the channels your creators already use
-        </h2>
-      </div>
-      <div className="relative mx-auto max-w-4xl overflow-hidden">
+        </motion.h2>
+      </motion.div>
+      <motion.div
+        className="relative mx-auto max-w-4xl overflow-hidden"
+        initial="initial"
+        variants={revealItemVariants}
+        viewport={revealViewport}
+        whileInView="animate"
+      >
         <div
           aria-hidden
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent"
@@ -34,7 +56,7 @@ export function MarketingMarquee() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

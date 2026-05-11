@@ -2,9 +2,16 @@
 
 import { Button, Label, Switch } from "@heroui/react";
 import { Icon } from "@iconify/react";
+import { motion } from "motion/react";
 import { useState } from "react";
 
 import { pricingPlans } from "@/constants/landing-page";
+import {
+  revealCardVariants,
+  revealContainerVariants,
+  revealItemVariants,
+  revealViewport,
+} from "@/components/marketing/motion-variants";
 
 export function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
@@ -14,17 +21,35 @@ export function Pricing() {
       className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-4 py-24"
       id="pricing"
     >
-      <div className="flex flex-col items-center gap-2 text-center">
-        <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+      <motion.div
+        className="flex flex-col items-center gap-2 text-center"
+        initial="initial"
+        variants={revealContainerVariants}
+        viewport={revealViewport}
+        whileInView="animate"
+      >
+        <motion.span
+          className="text-sm font-semibold uppercase tracking-wide text-accent"
+          variants={revealItemVariants}
+        >
           Pricing
-        </span>
-        <h2 className="text-4xl font-bold leading-tight">
+        </motion.span>
+        <motion.h2
+          className="text-4xl font-bold leading-tight"
+          variants={revealItemVariants}
+        >
           Simple, transparent pricing
-        </h2>
-        <span className="text-lg leading-relaxed text-muted">
+        </motion.h2>
+        <motion.span
+          className="text-lg leading-relaxed text-muted"
+          variants={revealItemVariants}
+        >
           Choose the plan that fits your creator program. No hidden fees.
-        </span>
-        <div className="mt-4 flex items-center gap-3">
+        </motion.span>
+        <motion.div
+          className="mt-4 flex items-center gap-3"
+          variants={revealItemVariants}
+        >
           <Label
             className={`cursor-pointer text-sm font-medium ${
               !isYearly ? "text-foreground" : "text-muted"
@@ -45,15 +70,25 @@ export function Pricing() {
             Yearly
             <span className="ml-1 text-xs text-accent">(Save 20%)</span>
           </Label>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-3">
+        </motion.div>
+      </motion.div>
+      <motion.div
+        className="grid grid-cols-1 items-start gap-6 md:grid-cols-3"
+        initial="initial"
+        variants={revealContainerVariants}
+        viewport={revealViewport}
+        whileInView="animate"
+      >
         {pricingPlans.map((plan) => (
-          <div className="h-full" key={plan.name}>
+          <motion.div
+            className="h-full"
+            key={plan.name}
+            variants={revealCardVariants}
+          >
             <PricingCard isYearly={isYearly} plan={plan} />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
