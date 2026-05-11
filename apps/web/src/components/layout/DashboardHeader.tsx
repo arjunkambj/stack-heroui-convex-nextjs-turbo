@@ -8,7 +8,7 @@ export function DashboardHeader({ onToggle }: { onToggle: () => void }) {
       <button
         type="button"
         onClick={onToggle}
-        className="inline-flex size-9 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface-secondary hover:text-foreground"
+        className="inline-flex size-9 items-center rounded-3xl justify-center text-muted transition-colors hover:bg-surface-secondary hover:text-foreground"
         aria-label="Toggle sidebar"
       >
         <Icon icon="hugeicons:sidebar-left" className="size-4.5" />
