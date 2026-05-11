@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
+import { UserProfileMenu } from "@/components/layout/UserProfileMenu";
 
 export function DashboardHeader({ onToggle }: { onToggle: () => void }) {
   return (
@@ -13,6 +14,9 @@ export function DashboardHeader({ onToggle }: { onToggle: () => void }) {
       >
         <Icon icon="hugeicons:sidebar-left" className="size-4.5" />
       </button>
+      <div className="ml-auto flex items-center justify-end">
+        <UserProfileMenu />
+      </div>
     </header>
   );
 }

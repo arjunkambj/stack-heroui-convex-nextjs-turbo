@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   description:
     "Unifeed tracks all your creators, competitors, and campaigns across TikTok, Instagram, YouTube, and X — no passwords required.",
   icons: {
-    icon: "/icon",
+    icon: "/icon.svg",
   },
   openGraph: {
     title: "Unifeed | Track Any Account Across All Socials",

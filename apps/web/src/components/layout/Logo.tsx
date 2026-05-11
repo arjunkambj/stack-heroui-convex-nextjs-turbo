@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface LogoProps {
   className?: string
   markOnly?: boolean
@@ -5,20 +7,19 @@ interface LogoProps {
 
 export default function Logo({ className, markOnly = false }: LogoProps) {
   return (
-    <div className={`flex items-center gap-2.5${className ? ` ${className}` : ""}`}>
-      <svg
-        viewBox="0 0 40 40"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-7 w-7 text-foreground"
-      >
-        {/* Left stroke — tall with slanted top and rounded bottom */}
-        <path d="M6 4L18 10V26C18 29.3137 15.3137 32 12 32C8.68629 32 6 29.3137 6 26V4Z" />
-        {/* Right stroke — shorter with flat top and angled bottom */}
-        <path d="M22 14H34V24L22 30V14Z" />
-      </svg>
+    <div
+      className={`group flex cursor-pointer items-center gap-2.5${className ? ` ${className}` : ""}`}
+    >
+      <Image
+        alt=""
+        aria-hidden="true"
+        className="h-7 w-7 transition-opacity group-hover:opacity-85"
+        height={28}
+        src="/icon.svg"
+        width={28}
+      />
       {!markOnly && (
-        <span className="text-lg font-display font-bold tracking-tight text-foreground">
+        <span className="text-lg font-display font-bold tracking-tight text-foreground transition-colors group-hover:text-accent">
           Unifeed
         </span>
       )}
