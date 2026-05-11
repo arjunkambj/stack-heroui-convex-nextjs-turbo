@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@heroui/react";
+import { buttonVariants } from "@heroui/react";
 import Link from "next/link";
 import { motion } from "motion/react";
 
@@ -61,8 +61,8 @@ export function Navbar() {
           ))}
         </motion.ul>
         <motion.div variants={navItemVariants}>
-          <Link href="/sign-in">
-            <Button size="sm">Get Started</Button>
+          <Link className={buttonVariants({ size: "sm" })} href="/sign-in">
+            Get Started
           </Link>
         </motion.div>
       </nav>
