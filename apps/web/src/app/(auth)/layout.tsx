@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import Logo from "@/components/layout/Logo";
 import { stackServerApp } from "@/stack/server";
 
+const authenticatedRedirectPath = "/overview";
+
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
@@ -13,7 +15,7 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
   const user = await stackServerApp.getUser();
 
   if (user) {
-    redirect("/overview");
+    redirect(authenticatedRedirectPath);
   }
 
   return (

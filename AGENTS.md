@@ -44,6 +44,7 @@ Convex deployment vars are already committed in `.env` files (not secret), but d
 - **Tailwind v4** via `@tailwindcss/postcss` in `postcss.config.mjs`. No traditional `tailwind.config.js`.
 - **HeroUI v3 + Iconify** — use `@heroui/react`, `@heroui/styles`, and `@iconify/react` for web UI.
 - **Route groups**: `(marketing)` (landing), `(auth)` (`/sign-in`, `/handler/[...stack]`), `(dashboard)` (`/overview`, `/tracking/*`, `/teams`, `/settings`).
+- **Component organization**: keep route/page files thin. Put reusable or page-level UI in modular folders under `apps/web/src/components` (for example `src/components/settings` or `src/components/team`). Prefer small, focused components over long monolithic files. Keep tiny helpers, constants, and local types inside the `.tsx` component files that use them; do not add standalone utility/type `.ts` files inside component folders unless they are genuinely shared across multiple feature areas.
 - **Auth wiring**: `src/stack/server.ts` (server-only `StackServerApp`), `src/stack/client.ts` (`StackClientApp`). `src/proxy.ts` exists but is not wired as Next.js middleware yet.
 - **Convex client**: uses `NEXT_PUBLIC_CONVEX_URL` from the committed `.env`.
 - **Fonts**: multiple Google Font variables in `layout.tsx` (`--font-heading`, `--font-sans`, `--font-display`, `--font-app-sans`).

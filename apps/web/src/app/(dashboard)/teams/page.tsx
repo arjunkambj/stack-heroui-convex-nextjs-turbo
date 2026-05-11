@@ -1,3 +1,5 @@
+import { TeamLayout } from "@/components/team";
+
 export default function TeamsPage() {
-  return <div>Teams</div>
+  return <TeamLayout />;
 }

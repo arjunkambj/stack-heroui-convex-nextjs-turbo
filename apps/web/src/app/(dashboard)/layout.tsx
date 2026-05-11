@@ -1,9 +1,27 @@
+import { redirect } from "next/navigation";
 import { DashboardShell } from "@/components/layout/DashboardShell";
+import { stackServerApp } from "@/stack/server";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <DashboardShell>{children}</DashboardShell>;
+  const user = await stackServerApp.getUser();
+
+  if (!user) {
+    redirect("/sign-in");
+  }
+
+  return (
+    <DashboardShell
+      user={{
+        displayName: user.displayName,
+        primaryEmail: user.primaryEmail,
+        profileImageUrl: user.profileImageUrl,
+      }}
+    >
+      {children}
+    </DashboardShell>
+  );
 }

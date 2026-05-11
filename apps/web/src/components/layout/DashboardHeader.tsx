@@ -3,7 +3,19 @@
 import { Icon } from "@iconify/react";
 import { UserProfileMenu } from "@/components/layout/UserProfileMenu";
 
-export function DashboardHeader({ onToggle }: { onToggle: () => void }) {
+type DashboardUser = {
+  displayName: string | null;
+  primaryEmail: string | null;
+  profileImageUrl: string | null;
+};
+
+export function DashboardHeader({
+  onToggle,
+  user,
+}: {
+  onToggle: () => void;
+  user: DashboardUser;
+}) {
   return (
     <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
       <button
@@ -15,7 +27,7 @@ export function DashboardHeader({ onToggle }: { onToggle: () => void }) {
         <Icon icon="hugeicons:sidebar-left" className="size-4.5" />
       </button>
       <div className="ml-auto flex items-center justify-end">
-        <UserProfileMenu />
+        <UserProfileMenu user={user} />
       </div>
     </header>
   );

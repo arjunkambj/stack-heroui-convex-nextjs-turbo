@@ -17,6 +17,7 @@
     "@iconify/react": "^6.0.2",
     "@stackframe/stack": "2.8.88",
     "@tailwindcss/postcss": "^4.3.0",
+    "@tanstack/react-query": "^5.100.10",
     "convex": "^1.38.0",
     "lenis": "^1.3.23",
     "motion": "^12.38.0",

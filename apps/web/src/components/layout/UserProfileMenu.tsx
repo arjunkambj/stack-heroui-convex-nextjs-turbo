@@ -2,12 +2,18 @@
 
 import { Avatar, Dropdown, Label } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import { useUser } from "@stackframe/stack";
 import { useRouter } from "next/navigation";
+import { stackClientApp } from "@/stack/client";
 
 const menuRoutes = {
   settings: "/settings",
 } as const;
+
+type ProfileUser = {
+  displayName: string | null;
+  primaryEmail: string | null;
+  profileImageUrl: string | null;
+};
 
 const getInitials = (value: string | null) =>
   value
@@ -17,9 +23,8 @@ const getInitials = (value: string | null) =>
     .map((part) => part[0]?.toUpperCase())
     .join("");
 
-export function UserProfileMenu() {
+export function UserProfileMenu({ user }: { user: ProfileUser }) {
   const router = useRouter();
-  const user = useUser({ or: "redirect" });
   const initials =
     getInitials(user.displayName) || getInitials(user.primaryEmail);
 
@@ -27,9 +32,9 @@ export function UserProfileMenu() {
     <Dropdown>
       <Dropdown.Trigger
         aria-label="Open user profile"
-        className="group size-10 cursor-pointer rounded-full border border-border/50 bg-surface p-0 items-center flex justify-center transition-colors hover:border-accent/40 hover:bg-surface-secondary"
+        className="group size-9 cursor-pointer rounded-full border border-border bg-surface p-0 items-center flex justify-center transition-colors hover:border-accent/40 hover:bg-surface-secondary"
       >
-        <Avatar className="size-9 rounded-full">
+        <Avatar className="size-7.5 rounded-full">
           {user.profileImageUrl && (
             <Avatar.Image
               src={user.profileImageUrl}
@@ -78,7 +83,7 @@ export function UserProfileMenu() {
             }
 
             if (key === "logout") {
-              await user.signOut();
+              await stackClientApp.signOut();
             }
           }}
         >
