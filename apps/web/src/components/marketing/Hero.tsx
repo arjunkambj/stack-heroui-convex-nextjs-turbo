@@ -21,7 +21,10 @@ const imageVariants = {
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[60dvh] w-full flex-col gap-12 px-4 pb-20 pt-24 sm:pt-28">
+    <section
+      className="relative flex min-h-[60dvh] w-full flex-col gap-12 px-4 pb-20 pt-24 sm:pt-28"
+      id="hero"
+    >
       <motion.div
         animate="animate"
         className="relative z-10 flex flex-col items-center gap-4"
@@ -29,10 +32,10 @@ export function Hero() {
         variants={revealContainerVariants}
       >
         <motion.div
-          className="rounded-3xl bg-surface-secondary p-1"
+          className="rounded-full border border-border/60 bg-surface/80 px-3 py-1 shadow-sm shadow-foreground/5"
           variants={revealItemVariants}
         >
-          <Chip className="rounded-2xl bg-surface px-2 py-.5 text-accent">
+          <Chip className="rounded-full bg-transparent px-0 py-0 text-accent">
             Creator campaign intelligence
           </Chip>
         </motion.div>
@@ -58,7 +61,7 @@ export function Hero() {
             Start tracking
           </Link>
           <Link
-            className={buttonVariants({ size: "lg", variant: "ghost" })}
+            className={buttonVariants({ size: "lg", variant: "tertiary" })}
             href="#features"
           >
             View features
@@ -67,7 +70,7 @@ export function Hero() {
       </motion.div>
       <motion.div
         animate="animate"
-        className="relative z-10 mx-auto aspect-[16/9] w-full max-w-5xl overflow-hidden rounded-[2rem] bg-surface/80 shadow-2xl shadow-foreground/10"
+        className="relative z-10 mx-auto aspect-[16/9] w-full max-w-5xl overflow-hidden rounded-[2rem] bg-surface/80 shadow-2xl shadow-foreground/10 dark:border dark:border-border/60 dark:bg-surface/70 dark:shadow-black/50"
         initial="initial"
         variants={imageVariants}
       />

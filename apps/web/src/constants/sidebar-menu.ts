@@ -26,46 +26,15 @@ export const sidebarCategories: MenuCategory[] = [
     icon: "hugeicons:global",
     items: [
       {
-        name: "Accounts",
+        name: "Social Account",
         href: "/socials/accounts",
         icon: "hugeicons:user-group",
-      },
-      {
-        name: "Videos",
-        href: "/socials/videos",
-        icon: "hugeicons:video-01",
-      },
-      {
-        name: "Trends",
-        href: "/socials/trends",
-        icon: "hugeicons:trending-up-down",
-      },
-    ],
-  },
-  {
-    name: "Links",
-    icon: "hugeicons:link-circle",
-    items: [
-      {
-        name: "Manage Links",
-        href: "/links",
-        icon: "hugeicons:link-03",
-      },
-      {
-        name: "Analytics",
-        href: "/analytics",
-        icon: "hugeicons:chart-line-data-01",
       },
     ],
   },
 ];
 
 export const sidebarFooterItems: MenuItem[] = [
-  {
-    name: "Agent & API",
-    href: "/agent-api",
-    icon: "hugeicons:ai-programming",
-  },
   {
     name: "Teams",
     href: "/teams",

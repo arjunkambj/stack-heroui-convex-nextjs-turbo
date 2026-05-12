@@ -51,7 +51,7 @@ export function MarketingMarquee() {
               <div className="relative h-8 w-32">
                 <Image
                   alt={name}
-                  className="object-contain opacity-90 grayscale transition-opacity hover:opacity-100"
+                  className="object-contain opacity-90 grayscale transition-opacity hover:opacity-100 dark:brightness-0 dark:invert"
                   fill
                   sizes="128px"
                   src={logo}

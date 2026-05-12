@@ -1,8 +1,9 @@
 "use client";
 
-import { Avatar, Dropdown, Label } from "@heroui/react";
+import { Avatar, Dropdown, Label, Switch } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 import { stackClientApp } from "@/stack/client";
 
 const menuRoutes = {
@@ -25,8 +26,10 @@ const getInitials = (value: string | null) =>
 
 export function UserProfileMenu({ user }: { user: ProfileUser }) {
   const router = useRouter();
+  const { resolvedTheme, setTheme } = useTheme();
   const initials =
     getInitials(user.displayName) || getInitials(user.primaryEmail);
+  const isDark = resolvedTheme === "dark";
 
   return (
     <Dropdown>
@@ -87,6 +90,24 @@ export function UserProfileMenu({ user }: { user: ProfileUser }) {
             }
           }}
         >
+          <Dropdown.Item
+            id="theme"
+            shouldCloseOnSelect={false}
+            textValue="Dark mode"
+          >
+            <Icon icon="hugeicons:sun-03" className="size-5" />
+            <Label>Dark mode</Label>
+            <Switch
+              aria-label="Toggle dark mode"
+              className="ml-auto"
+              isSelected={isDark}
+              onChange={(selected) => setTheme(selected ? "dark" : "light")}
+            >
+              <Switch.Control>
+                <Switch.Thumb />
+              </Switch.Control>
+            </Switch>
+          </Dropdown.Item>
           <Dropdown.Item id="settings" textValue="Settings">
             <Icon icon="hugeicons:settings-02" className="size-5" />
             <Label>Settings</Label>

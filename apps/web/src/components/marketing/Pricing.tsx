@@ -47,7 +47,7 @@ export function Pricing() {
           Choose the plan that fits your creator program. No hidden fees.
         </motion.span>
         <motion.div
-          className="mt-4 flex items-center gap-3"
+          className="mt-4 flex items-center gap-3 rounded-full border border-border/60 bg-surface/80 px-4 py-2 shadow-sm shadow-foreground/5"
           variants={revealItemVariants}
         >
           <Label

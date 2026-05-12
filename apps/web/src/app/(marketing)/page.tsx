@@ -31,20 +31,20 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="motion-landing flex w-full flex-col bg-background">
-      <div className="relative">
-        <div className="pointer-events-none absolute inset-0 bg-[url('/mainbg.avif')] bg-cover bg-center bg-no-repeat" />
+    <main className="motion-landing relative isolate flex w-full flex-col bg-background">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[calc(60dvh+18rem)] bg-[url('/mainbg.avif')] bg-cover bg-center bg-no-repeat dark:opacity-35" />
+      <div className="relative z-10 flex flex-col">
         <Navbar />
         <Hero />
+        <MarketingMarquee />
+        <Features />
+        <WhyUS />
+        <HowItWorks />
+        <Testimonitals />
+        <Pricing />
+        <FAQ />
+        <Footer />
       </div>
-      <MarketingMarquee />
-      <Features />
-      <WhyUS />
-      <HowItWorks />
-      <Testimonitals />
-      <Pricing />
-      <FAQ />
-      <Footer />
     </main>
   );
 }
