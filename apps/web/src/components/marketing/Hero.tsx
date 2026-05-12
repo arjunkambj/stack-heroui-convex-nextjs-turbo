@@ -32,10 +32,10 @@ export function Hero() {
         variants={revealContainerVariants}
       >
         <motion.div
-          className="rounded-full border border-border/60 bg-surface/80 px-3 py-1 shadow-sm shadow-foreground/5"
+          className="rounded-2xl border border-border/60 bg-surface/80 px-3 py-1"
           variants={revealItemVariants}
         >
-          <Chip className="rounded-full bg-transparent px-0 py-0 text-accent">
+          <Chip className="rounded-xl bg-transparent px-0 py-0 text-accent">
             Creator campaign intelligence
           </Chip>
         </motion.div>

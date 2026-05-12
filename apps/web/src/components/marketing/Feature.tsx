@@ -57,15 +57,23 @@ export function Features() {
       >
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {firstRow.map((item) => (
-            <motion.div key={item.heading} variants={revealCardVariants}>
-              <FeatureCard compact item={item} />
+            <motion.div
+              className="h-full"
+              key={item.heading}
+              variants={revealCardVariants}
+            >
+              <FeatureCard item={item} />
             </motion.div>
           ))}
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {secondRow.map((item) => (
-            <motion.div key={item.heading} variants={revealCardVariants}>
+            <motion.div
+              className="h-full"
+              key={item.heading}
+              variants={revealCardVariants}
+            >
               <FeatureCard item={item} />
             </motion.div>
           ))}
@@ -75,17 +83,9 @@ export function Features() {
   );
 }
 
-const FeatureCard = ({
-  compact = false,
-  item,
-}: {
-  compact?: boolean;
-  item: (typeof featureItems)[number];
-}) => (
-  <div className="flex flex-col overflow-hidden rounded-[2rem] border border-border/50 bg-surface">
-    <div
-      className={`relative w-full ${compact ? "h-52 md:h-60" : "aspect-video"}`}
-    >
+const FeatureCard = ({ item }: { item: (typeof featureItems)[number] }) => (
+  <div className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-border/50 bg-surface">
+    <div className="relative h-56 w-full md:h-60">
       <Image
         alt={item.heading}
         className="object-cover"
