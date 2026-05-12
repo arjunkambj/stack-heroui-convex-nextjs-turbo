@@ -13,7 +13,7 @@ if (!stackPublishableClientKey) {
 }
 
 export const stackClientApp = new StackClientApp({
-  tokenStore: "cookie",
+  tokenStore: "nextjs-cookie",
   projectId: stackProjectId,
   publishableClientKey: stackPublishableClientKey,
   urls: {

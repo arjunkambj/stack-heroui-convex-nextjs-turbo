@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
-import Providers from "@/components/Providers";
+import Providers from "@/components/providers";
 import { StackProvider, StackTheme } from "@stackframe/stack";
 import { stackServerApp } from "@/stack/server";
 import {
@@ -9,7 +9,6 @@ import {
   Inter,
   Figtree,
 } from "next/font/google";
-import { Databuddy } from "@databuddy/sdk/react";
 
 const figtreeHeading = Figtree({
   subsets: ["latin"],
@@ -68,7 +67,6 @@ export default function RootLayout({
             <Providers>{children}</Providers>
           </StackTheme>
         </StackProvider>
-        <Databuddy clientId="" />
       </body>
     </html>
   );

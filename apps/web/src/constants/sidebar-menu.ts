@@ -1,13 +1,15 @@
+import type { Route } from "next";
+
 export interface MenuItem {
-  name: string
-  href: string
-  icon: string
+  name: string;
+  href: Route;
+  icon: string;
 }
 
 export interface MenuCategory {
-  name: string
-  icon: string
-  items: MenuItem[]
+  name: string;
+  icon: string;
+  items: MenuItem[];
 }
 
 export const sidebarMainItems: MenuItem[] = [
@@ -16,7 +18,7 @@ export const sidebarMainItems: MenuItem[] = [
     href: "/overview",
     icon: "hugeicons:home-03",
   },
-]
+];
 
 export const sidebarCategories: MenuCategory[] = [
   {
@@ -56,7 +58,7 @@ export const sidebarCategories: MenuCategory[] = [
       },
     ],
   },
-]
+];
 
 export const sidebarFooterItems: MenuItem[] = [
   {
@@ -74,9 +76,8 @@ export const sidebarFooterItems: MenuItem[] = [
     href: "/settings",
     icon: "hugeicons:settings-02",
   },
-]
+];
 
-// Map routes to breadcrumb-friendly labels
 export const routeLabels: Record<string, string> = {
   "/overview": "Overview",
   "/socials": "Socials",
@@ -88,4 +89,4 @@ export const routeLabels: Record<string, string> = {
   "/agent-api": "Agent & API",
   "/teams": "Teams",
   "/settings": "Settings",
-}
+};

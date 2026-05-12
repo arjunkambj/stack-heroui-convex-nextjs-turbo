@@ -10,7 +10,7 @@ export const config = {
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next();
 
-  const user = await stackServerApp.getUser();
+  const user = await stackServerApp.getUser({ tokenStore: request });
 
   if (user) {
     return NextResponse.redirect(new URL("/overview", request.url));

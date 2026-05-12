@@ -1,6 +1,8 @@
 import "server-only";
 
 import { StackServerApp } from "@stackframe/stack";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 const stackProjectId = process.env.NEXT_PUBLIC_STACK_PROJECT_ID;
 const stackPublishableClientKey =
@@ -32,3 +34,15 @@ export const stackServerApp = new StackServerApp({
     afterSignOut: "/",
   },
 });
+
+export const getStackConvexToken = async (request: NextRequest) => {
+  const token = await stackServerApp.getConvexHttpClientAuth({
+    tokenStore: request,
+  });
+
+  if (token === "") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  return token;
+};

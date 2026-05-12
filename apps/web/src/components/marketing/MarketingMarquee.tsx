@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 
 import { brands } from "@/constants/landing-page";
@@ -47,12 +48,16 @@ export function MarketingMarquee() {
               className="flex shrink-0 items-center gap-4 px-12"
               key={`${name}-${index}`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt={name}
-                className="h-8 w-auto opacity-90 grayscale transition-opacity hover:opacity-100"
-                src={logo}
-              />
+              <div className="relative h-8 w-32">
+                <Image
+                  alt={name}
+                  className="object-contain opacity-90 grayscale transition-opacity hover:opacity-100"
+                  fill
+                  sizes="128px"
+                  src={logo}
+                  unoptimized
+                />
+              </div>
             </div>
           ))}
         </div>

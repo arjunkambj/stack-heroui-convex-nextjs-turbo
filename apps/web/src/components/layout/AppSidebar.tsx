@@ -8,17 +8,12 @@ import {
   sidebarCategories,
   sidebarFooterItems,
 } from "@/constants/sidebar-menu";
+import type { MenuItem } from "@/constants/sidebar-menu";
 import Logo from "./Logo";
-
-type SidebarItem = {
-  name: string;
-  href: string;
-  icon: string;
-};
 
 type SidebarSection = {
   name?: string;
-  items: SidebarItem[];
+  items: MenuItem[];
 };
 
 const collapsedRailSlot =
@@ -29,7 +24,7 @@ const NavItem = ({
   active,
   collapsed,
 }: {
-  item: SidebarItem;
+  item: MenuItem;
   active: boolean;
   collapsed: boolean;
 }) => (
