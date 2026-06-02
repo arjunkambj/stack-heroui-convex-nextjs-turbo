@@ -1,10 +1,10 @@
 # Unifeed — Agent Context
 
-Compact Turborepo (pnpm): Next.js 16 landing app + Convex backend, Stack Auth, HeroUI, Iconify.
+Compact Turborepo (pnpm): Next.js 16 landing app + Convex backend, Hexclave, HeroUI, Iconify.
 
 ## Monorepo boundaries
 
-- `apps/web` — `@unifeed/web` — Next.js 16 (App Router), React 19, Tailwind CSS v4, Stack Auth.
+- `apps/web` — `@unifeed/web` — Next.js 16 (App Router), React 19, Tailwind CSS v4, Hexclave.
 - `apps/backend` — `@unifeed/backend` — Convex functions only (no Node server).
 - `packages/eslint-config` — shared ESLint flat configs (`base`, `next-js`, `react-internal`).
 - `packages/typescript-config` — shared tsconfig bases (`base.json`, `nextjs.json`, `react-library.json`).
@@ -31,10 +31,10 @@ pnpm --filter @unifeed/web check-types   # next typegen && tsc --noEmit
 
 All of these must be present for local dev and build:
 
-- `NEXT_PUBLIC_STACK_PROJECT_ID`
-- `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`
-- `STACK_SECRET_SERVER_KEY`
-- `STACK_WEBHOOK_SECRET`
+- `NEXT_PUBLIC_HEXCLAVE_PROJECT_ID`
+- `NEXT_PUBLIC_HEXCLAVE_PUBLISHABLE_CLIENT_KEY`
+- `HEXCLAVE_SECRET_SERVER_KEY`
+- `HEXCLAVE_WEBHOOK_SECRET`
 - `NEXT_PUBLIC_APP_URL`
 
 Convex deployment vars are already committed in `.env` files (not secret), but do not overwrite them unless moving to a new Convex project.
@@ -43,9 +43,9 @@ Convex deployment vars are already committed in `.env` files (not secret), but d
 
 - **Tailwind v4** via `@tailwindcss/postcss` in `postcss.config.mjs`. No traditional `tailwind.config.js`.
 - **HeroUI v3 + Iconify** — use `@heroui/react`, `@heroui/styles`, and `@iconify/react` for web UI.
-- **Route groups**: `(marketing)` (landing), `(auth)` (`/sign-in`, `/handler/[...stack]`), `(dashboard)` (`/overview`, `/tracking/*`, `/teams`, `/settings`).
+- **Route groups**: `(marketing)` (landing), `(auth)` (`/sign-in`, `/handler/[...hexclave]`), `(dashboard)` (`/overview`, `/tracking/*`, `/teams`, `/settings`).
 - **Component organization**: keep route/page files thin. Put reusable or page-level UI in modular folders under `apps/web/src/components` (for example `src/components/settings` or `src/components/team`). Prefer small, focused components over long monolithic files. Keep tiny helpers, constants, and local types inside the `.tsx` component files that use them; do not add standalone utility/type `.ts` files inside component folders unless they are genuinely shared across multiple feature areas.
-- **Auth wiring**: `src/stack/server.ts` (server-only `StackServerApp`), `src/stack/client.ts` (`StackClientApp`). `src/proxy.ts` exists but is not wired as Next.js middleware yet.
+- **Auth wiring**: `src/hexclave/server.ts` (server-only `HexclaveServerApp`), `src/hexclave/client.ts` (`HexclaveClientApp`). `src/proxy.ts` exists but is not wired as Next.js middleware yet.
 - **Convex client**: uses `NEXT_PUBLIC_CONVEX_URL` from the committed `.env`.
 - **Fonts**: multiple Google Font variables in `layout.tsx` (`--font-heading`, `--font-sans`, `--font-display`, `--font-app-sans`).
 - **Images**: remotePatterns in `next.config.js` include YouTube thumbnails, Vercel Blob, CloudFront, pravatar, simpleicons, and placehold.co.
@@ -55,8 +55,8 @@ Convex deployment vars are already committed in `.env` files (not secret), but d
 - **Convex-only** — all code lives under `convex/`. No Express/Fastify server.
 - **Do not edit** `convex/_generated/**`. These are codegen artifacts.
 - **Schema**: `users`, `subscriptions`, `payments` (see `convex/schema.ts`).
-- **Auth**: Stack Auth via `convex/auth.config.ts` using `getConvexProvidersConfig`.
-- **Webhooks**: `convex/http.ts` mounts `POST /webhook/stack` → `convex/webhooks/stack.ts` (handles `user.created`, `user.updated`, `user.deleted`).
+- **Auth**: Hexclave via `convex/auth.config.ts` using `getConvexProvidersConfig`.
+- **Webhooks**: `convex/http.ts` mounts `POST /webhook/hexclave` → `convex/webhooks/hexclave.ts` (handles `user.created`, `user.updated`, `user.deleted`).
 - **Auth helpers**: `convex/lib/auth.ts` — `requireAuth`, `getCurrentUser`, `requireCurrentUser`.
 - **TypeScript** strictness: backend tsconfig enables `noUncheckedIndexedAccess`, `verbatimModuleSyntax`, `noImplicitOverride`.
 

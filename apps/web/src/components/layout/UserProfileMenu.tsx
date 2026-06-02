@@ -4,7 +4,7 @@ import { Avatar, Dropdown, Label, Switch } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
-import { stackClientApp } from "@/stack/client";
+import { hexclaveClientApp } from "@/hexclave/client";
 
 const menuRoutes = {
   settings: "/settings",
@@ -86,7 +86,7 @@ export function UserProfileMenu({ user }: { user: ProfileUser }) {
             }
 
             if (key === "logout") {
-              await stackClientApp.signOut();
+              await hexclaveClientApp.signOut();
             }
           }}
         >

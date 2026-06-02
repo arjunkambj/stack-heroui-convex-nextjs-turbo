@@ -5,8 +5,8 @@
 ## Scope
 
 - `/`: landing page
-- `/sign-in`: Stack Auth entry
-- `/handler/[...stack]`: Stack Auth handler
+- `/sign-in`: Hexclave entry
+- `/handler/[...hexclave]`: Hexclave handler
 
 ## Commands
 

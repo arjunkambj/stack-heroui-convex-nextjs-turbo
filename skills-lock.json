@@ -24,11 +24,11 @@
       "sourceType": "github",
       "computedHash": "db85045827ebeb83ac8dbc992b69188755eeb74dcf01cbf5e694d58aa494a106"
     },
-    "stack-auth-convex": {
-      "source": "arjunkambj/stack-auth-convex",
+    "hexclave-convex": {
+      "source": "arjunkambj/hexclave-convex",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "c5c6a099b214fd96d0b462acbafe04b075a5da8c329c7206d48fa1bd5abe1b49"
+      "computedHash": "739cbfbfadab9de7a88330a0a7ffc88473d1a7e8f8603ec723aaa9e75eabf177"
     }
   }
 }

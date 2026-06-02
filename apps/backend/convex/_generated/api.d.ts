@@ -8,8 +8,8 @@
  * @module
  */
 
+import type * as hexclave_auth from "../hexclave/auth.js";
 import type * as http from "../http.js";
-import type * as lib_stack from "../lib/stack.js";
 
 import type {
   ApiFromModules,
@@ -18,8 +18,8 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  "hexclave/auth": typeof hexclave_auth;
   http: typeof http;
-  "lib/stack": typeof lib_stack;
 }>;
 
 /**
@@ -49,5 +49,5 @@ export declare const internal: FilterApi<
 >;
 
 export declare const components: {
-  stack_auth: import("@stackframe/stack/_generated/component.js").ComponentApi<"stack_auth">;
+  stack_auth: import("@hexclave/next/_generated/component.js").ComponentApi<"stack_auth">;
 };

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
 import Providers from "@/components/Providers";
-import { StackProvider, StackTheme } from "@stackframe/stack";
-import { stackServerApp } from "@/stack/server";
+import { HexclaveProvider, HexclaveTheme } from "@hexclave/next";
+import { hexclaveServerApp } from "@/hexclave/server";
 import {
   Bricolage_Grotesque,
   Plus_Jakarta_Sans,
@@ -62,11 +62,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-sans" suppressHydrationWarning>
-        <StackProvider app={stackServerApp}>
-          <StackTheme>
+        <HexclaveProvider app={hexclaveServerApp}>
+          <HexclaveTheme>
             <Providers>{children}</Providers>
-          </StackTheme>
-        </StackProvider>
+          </HexclaveTheme>
+        </HexclaveProvider>
       </body>
     </html>
   );

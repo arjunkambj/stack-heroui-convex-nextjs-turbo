@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { useUser } from "@stackframe/stack";
+import { useUser } from "@hexclave/next";
 import { TeamSection } from "@/components/team/TeamSection";
 import { TeamsPageSkeleton } from "@/components/team/TeamsPageSkeleton";
 
@@ -16,7 +16,7 @@ function TeamLayoutContent() {
           Manage team
         </h1>
         <p className="max-w-2xl text-sm leading-6 text-muted">
-          Choose a Stack team before managing members and invitations.
+          Choose a Hexclave team before managing members and invitations.
         </p>
       </div>
     );

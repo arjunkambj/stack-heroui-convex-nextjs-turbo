@@ -1,6 +1,6 @@
 "use client";
 
-import type { Team } from "@stackframe/stack";
+import type { Team } from "@hexclave/next";
 
 import { useEffect, useState } from "react";
 import { TeamMembersTable } from "@/components/team/TeamMembersTable";

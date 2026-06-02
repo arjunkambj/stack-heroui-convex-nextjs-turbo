@@ -1,25 +1,25 @@
 # Unifeed
 
-Unifeed is a trimmed auth-first prop-firm landing app built with Next.js, Convex, Stack Auth, and Turborepo.
+Unifeed is a trimmed auth-first prop-firm landing app built with Next.js, Convex, Hexclave, and Turborepo.
 
 ## What stays
 
-- `apps/web`: landing page plus Stack Auth routes.
-- `apps/backend`: only Convex auth config, `users` schema, Stack webhook sync, and auth/user helpers.
+- `apps/web`: landing page plus Hexclave routes.
+- `apps/backend`: only Convex auth config, `users` schema, Hexclave webhook sync, and auth/user helpers.
 - `packages/eslint-config` and `packages/typescript-config`: shared workspace config.
 
 ## Routes
 
 - `/`: public landing page.
 - `/sign-in`: authentication entry.
-- `/handler/[...stack]`: Stack Auth handler route.
+- `/handler/[...hexclave]`: Hexclave handler route.
 
 ## Convex scope
 
-- `auth.config.ts`: Stack provider config for Convex auth.
+- `auth.config.ts`: Hexclave provider config for Convex auth.
 - `schema.ts`: `users` table only.
-- `http.ts`: Stack webhook route.
-- `webhooks/stack.ts`: syncs `user.created`, `user.updated`, and `user.deleted`.
+- `http.ts`: Hexclave webhook route.
+- `webhooks/hexclave.ts`: syncs `user.created`, `user.updated`, and `user.deleted`.
 - `core/users.ts`: internal webhook upsert/delete mutations.
 - `users.ts`: current-user query.
 - `lib/auth.ts`: auth helpers.
@@ -41,10 +41,10 @@ pnpm --filter @unifeed/backend dev
 
 ## Required env
 
-- `NEXT_PUBLIC_STACK_PROJECT_ID`
-- `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`
-- `STACK_SECRET_SERVER_KEY`
-- `STACK_WEBHOOK_SECRET`
+- `NEXT_PUBLIC_HEXCLAVE_PROJECT_ID`
+- `NEXT_PUBLIC_HEXCLAVE_PUBLISHABLE_CLIENT_KEY`
+- `HEXCLAVE_SECRET_SERVER_KEY`
+- `HEXCLAVE_WEBHOOK_SECRET`
 
 ## Notes
 

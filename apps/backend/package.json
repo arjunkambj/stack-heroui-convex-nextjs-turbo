@@ -21,7 +21,7 @@
     "typescript": "6.0.3"
   },
   "dependencies": {
-    "@stackframe/stack": "2.8.108",
+    "@hexclave/next": "^1.0.1",
     "convex": "^1.40.0",
     "zod": "4.4.3"
   }

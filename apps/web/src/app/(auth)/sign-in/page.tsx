@@ -1,12 +1,12 @@
 "use client";
 
-import { useStackApp } from "@stackframe/stack";
+import { useHexclaveApp } from "@hexclave/next";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { Button, Input, InputOTP, Spinner } from "@heroui/react";
 
 export default function SignInPage() {
-  const app = useStackApp();
+  const app = useHexclaveApp();
 
   const [email, setEmail] = useState("");
   const [step, setStep] = useState<"email" | "otp">("email");

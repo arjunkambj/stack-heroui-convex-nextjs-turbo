@@ -11,7 +11,7 @@ import {
   TextField,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import { useUser } from "@stackframe/stack";
+import { useUser } from "@hexclave/next";
 import { PasswordPopover } from "@/components/settings/PasswordPopover";
 
 const cleanOptional = (value: string) => {

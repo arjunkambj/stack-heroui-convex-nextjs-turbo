@@ -13,8 +13,8 @@
   "dependencies": {
     "@heroui/react": "^3.0.4",
     "@heroui/styles": "^3.0.4",
+    "@hexclave/next": "^1.0.1",
     "@iconify/react": "^6.0.2",
-    "@stackframe/stack": "2.8.108",
     "@tailwindcss/postcss": "^4.3.0",
     "convex": "^1.40.0",
     "lenis": "^1.3.23",

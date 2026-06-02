@@ -1,13 +1,13 @@
 import { redirect } from "next/navigation";
 import { DashboardShell } from "@/components/layout/DashboardShell";
-import { stackServerApp } from "@/stack/server";
+import { hexclaveServerApp } from "@/hexclave/server";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await stackServerApp.getUser();
+  const user = await hexclaveServerApp.getUser();
 
   if (!user) {
     redirect("/sign-in");

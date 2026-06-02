@@ -1,6 +1,6 @@
 "use client";
 
-import type { Team } from "@stackframe/stack";
+import type { Team } from "@hexclave/next";
 
 import { useState } from "react";
 import {
@@ -65,7 +65,7 @@ export function InvitePopover({ team }: { team: Team }) {
                 placeholder="teammate@company.com"
                 variant="secondary"
               />
-              <Description>Stack will email a team invitation.</Description>
+              <Description>Hexclave will email a team invitation.</Description>
             </TextField>
 
             {error && (

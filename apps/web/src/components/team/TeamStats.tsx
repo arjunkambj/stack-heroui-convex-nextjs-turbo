@@ -1,6 +1,6 @@
 "use client";
 
-import type { Team } from "@stackframe/stack";
+import type { Team } from "@hexclave/next";
 
 export function TeamStats({
   membersCount,

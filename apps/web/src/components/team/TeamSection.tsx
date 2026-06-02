@@ -1,8 +1,8 @@
 "use client";
 
-import type { Team } from "@stackframe/stack";
+import type { Team } from "@hexclave/next";
 
-import { useUser } from "@stackframe/stack";
+import { useUser } from "@hexclave/next";
 import { InvitePopover } from "@/components/team/InvitePopover";
 import { TeamMembersContent } from "@/components/team/TeamMembersContent";
 

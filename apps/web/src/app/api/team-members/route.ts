@@ -1,6 +1,6 @@
-import type { ServerTeam } from "@stackframe/stack";
+import type { ServerTeam } from "@hexclave/next";
 
-import { stackServerApp } from "@/stack/server";
+import { hexclaveServerApp } from "@/hexclave/server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -9,7 +9,7 @@ const responseOptions = {
 };
 
 export async function GET(request: NextRequest) {
-  const user = await stackServerApp.getUser({ tokenStore: request });
+  const user = await hexclaveServerApp.getUser({ tokenStore: request });
 
   if (!user) {
     return NextResponse.json(
