@@ -2,7 +2,7 @@
 
 import type { Team } from "@stackframe/stack";
 
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { TeamMembersTable } from "@/components/team/TeamMembersTable";
 import { TeamStats } from "@/components/team/TeamStats";
 import { TeamTableSkeleton } from "@/components/team/TeamTableSkeleton";
@@ -25,7 +25,23 @@ type TeamTableRow = {
   subtitle: string;
 };
 
-const teamMembersQueryKey = (teamId: string) => ["team-members", teamId];
+type TeamMembersState =
+  | {
+      members: TeamMember[];
+      status: "pending";
+      teamId: string;
+    }
+  | {
+      error: Error;
+      members: TeamMember[];
+      status: "error";
+      teamId: string;
+    }
+  | {
+      members: TeamMember[];
+      status: "success";
+      teamId: string;
+    };
 
 const formatDate = (value: Date) =>
   new Intl.DateTimeFormat("en", {
@@ -59,15 +75,54 @@ export type { TeamTableRow };
 
 export function TeamMembersContent({ team }: { team: Team }) {
   const invitations = team.useInvitations();
-  const {
-    data: teamMembers = [],
-    error,
-    isPending,
-  } = useQuery({
-    queryKey: teamMembersQueryKey(team.id),
-    queryFn: loadTeamMembers,
-    staleTime: 60_000,
+  const [teamMembersState, setTeamMembersState] = useState<TeamMembersState>({
+    members: [],
+    status: "pending",
+    teamId: team.id,
   });
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    loadTeamMembers({ signal: abortController.signal })
+      .then((members) => {
+        setTeamMembersState({
+          members,
+          status: "success",
+          teamId: team.id,
+        });
+      })
+      .catch((loadError: unknown) => {
+        if (abortController.signal.aborted) {
+          return;
+        }
+
+        setTeamMembersState({
+          error:
+            loadError instanceof Error
+              ? loadError
+              : new Error("Unable to load team members"),
+          members: [],
+          status: "error",
+          teamId: team.id,
+        });
+      });
+
+    return () => {
+      abortController.abort();
+    };
+  }, [team.id]);
+
+  const isCurrentTeam = teamMembersState.teamId === team.id;
+  const isPending = !isCurrentTeam || teamMembersState.status === "pending";
+  const teamMembers =
+    isCurrentTeam && teamMembersState.status === "success"
+      ? teamMembersState.members
+      : [];
+  const error =
+    isCurrentTeam && teamMembersState.status === "error"
+      ? teamMembersState.error
+      : null;
 
   const rows: TeamTableRow[] = [
     ...teamMembers.map((member) => ({
@@ -97,10 +152,7 @@ export function TeamMembersContent({ team }: { team: Team }) {
       {isPending ? (
         <TeamTableSkeleton />
       ) : (
-        <TeamMembersTable
-          membersError={error instanceof Error ? error : null}
-          rows={rows}
-        />
+        <TeamMembersTable membersError={error} rows={rows} />
       )}
     </>
   );

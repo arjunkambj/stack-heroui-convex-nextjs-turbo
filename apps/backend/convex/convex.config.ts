@@ -2,6 +2,6 @@ import stackAuthComponent from "@stackframe/stack/convex.config";
 import { defineApp } from "convex/server";
 
 const app = defineApp();
-app.use(stackAuthComponent);
+app.use(stackAuthComponent as Parameters<typeof app.use>[0]);
 
 export default app;
