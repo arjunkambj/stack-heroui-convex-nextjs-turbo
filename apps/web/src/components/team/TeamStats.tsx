@@ -1,16 +1,12 @@
-"use client";
-
-import type { Team } from "@hexclave/next";
-
 export function TeamStats({
+  invitationsCount,
   membersCount,
   team,
 }: {
+  invitationsCount: number;
   membersCount: number;
-  team: Team;
+  team: { id: string };
 }) {
-  const invitations = team.useInvitations();
-
   return (
     <section className="grid gap-4 md:grid-cols-3">
       <div className="rounded-2xl bg-surface-secondary p-5">
@@ -22,7 +18,7 @@ export function TeamStats({
       <div className="rounded-2xl bg-surface-secondary p-5">
         <p className="text-sm text-muted">Pending invites</p>
         <p className="mt-2 text-2xl font-semibold text-foreground">
-          {invitations.length}
+          {invitationsCount}
         </p>
       </div>
       <div className="rounded-2xl bg-surface-secondary p-5">

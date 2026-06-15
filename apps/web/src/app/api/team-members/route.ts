@@ -27,10 +27,18 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const members = await team.listUsers();
+  const [members, invitations] = await Promise.all([
+    team.listUsers(),
+    team.listInvitations(),
+  ]);
 
   return NextResponse.json(
     {
+      invitations: invitations.map((invitation) => ({
+        id: invitation.id,
+        recipientEmail: invitation.recipientEmail,
+        expiresAt: invitation.expiresAt.toISOString(),
+      })),
       members: members.map((member) => ({
         id: member.id,
         displayName: member.displayName,

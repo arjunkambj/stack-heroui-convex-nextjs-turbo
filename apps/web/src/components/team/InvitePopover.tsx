@@ -3,6 +3,7 @@
 import type { Team } from "@hexclave/next";
 
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   Button,
   Description,
@@ -16,6 +17,7 @@ import {
 import { Icon } from "@iconify/react";
 
 export function InvitePopover({ team }: { team: Team }) {
+  const queryClient = useQueryClient();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [error, setError] = useState("");
@@ -27,6 +29,7 @@ export function InvitePopover({ team }: { team: Team }) {
 
     try {
       await team.inviteUser({ email: email.trim() });
+      await queryClient.invalidateQueries({ queryKey: ["team-data", team.id] });
       setStatus("sent");
       setEmail("");
     } catch (err) {

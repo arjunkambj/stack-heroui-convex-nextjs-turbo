@@ -2,7 +2,7 @@
 
 import type { Team } from "@hexclave/next";
 
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { TeamMembersTable } from "@/components/team/TeamMembersTable";
 import { TeamStats } from "@/components/team/TeamStats";
 import { TeamTableSkeleton } from "@/components/team/TeamTableSkeleton";
@@ -15,6 +15,12 @@ type TeamMember = {
   profileImageUrl: string | null;
 };
 
+type TeamInvitation = {
+  id: string;
+  expiresAt: string;
+  recipientEmail: string | null;
+};
+
 type TeamTableRow = {
   email: string | null;
   id: string;
@@ -25,24 +31,6 @@ type TeamTableRow = {
   subtitle: string;
 };
 
-type TeamMembersState =
-  | {
-      members: TeamMember[];
-      status: "pending";
-      teamId: string;
-    }
-  | {
-      error: Error;
-      members: TeamMember[];
-      status: "error";
-      teamId: string;
-    }
-  | {
-      members: TeamMember[];
-      status: "success";
-      teamId: string;
-    };
-
 const formatDate = (value: Date) =>
   new Intl.DateTimeFormat("en", {
     day: "numeric",
@@ -50,10 +38,10 @@ const formatDate = (value: Date) =>
     year: "numeric",
   }).format(value);
 
-const loadTeamMembers = async ({ signal }: { signal: AbortSignal }) => {
+const loadTeamData = async ({ signal }: { signal: AbortSignal }) => {
   const response = await fetch("/api/team-members", { signal });
   const payload = (await response.json()) as
-    | { members: TeamMember[] }
+    | { invitations: TeamInvitation[]; members: TeamMember[] }
     | { error: string };
 
   if (!response.ok) {
@@ -64,65 +52,24 @@ const loadTeamMembers = async ({ signal }: { signal: AbortSignal }) => {
     throw new Error("Unable to load team members");
   }
 
-  if (!("members" in payload)) {
-    throw new Error("Missing team members response");
+  if (!("invitations" in payload) || !("members" in payload)) {
+    throw new Error("Missing team data response");
   }
 
-  return payload.members;
+  return payload;
 };
 
 export type { TeamTableRow };
 
 export function TeamMembersContent({ team }: { team: Team }) {
-  const invitations = team.useInvitations();
-  const [teamMembersState, setTeamMembersState] = useState<TeamMembersState>({
-    members: [],
-    status: "pending",
-    teamId: team.id,
+  const teamDataQuery = useQuery({
+    queryFn: loadTeamData,
+    queryKey: ["team-data", team.id],
   });
-
-  useEffect(() => {
-    const abortController = new AbortController();
-
-    loadTeamMembers({ signal: abortController.signal })
-      .then((members) => {
-        setTeamMembersState({
-          members,
-          status: "success",
-          teamId: team.id,
-        });
-      })
-      .catch((loadError: unknown) => {
-        if (abortController.signal.aborted) {
-          return;
-        }
-
-        setTeamMembersState({
-          error:
-            loadError instanceof Error
-              ? loadError
-              : new Error("Unable to load team members"),
-          members: [],
-          status: "error",
-          teamId: team.id,
-        });
-      });
-
-    return () => {
-      abortController.abort();
-    };
-  }, [team.id]);
-
-  const isCurrentTeam = teamMembersState.teamId === team.id;
-  const isPending = !isCurrentTeam || teamMembersState.status === "pending";
-  const teamMembers =
-    isCurrentTeam && teamMembersState.status === "success"
-      ? teamMembersState.members
-      : [];
-  const error =
-    isCurrentTeam && teamMembersState.status === "error"
-      ? teamMembersState.error
-      : null;
+  const isPending = teamDataQuery.isPending;
+  const teamMembers = teamDataQuery.data?.members ?? [];
+  const invitations = teamDataQuery.data?.invitations ?? [];
+  const error = teamDataQuery.error;
 
   const rows: TeamTableRow[] = [
     ...teamMembers.map((member) => ({
@@ -138,7 +85,7 @@ export function TeamMembersContent({ team }: { team: Team }) {
       email: invitation.recipientEmail,
       id: invitation.id,
       imageUrl: null,
-      lastActivity: `Expires ${formatDate(invitation.expiresAt)}`,
+      lastActivity: `Expires ${formatDate(new Date(invitation.expiresAt))}`,
       name: "Pending invite",
       status: "Invited" as const,
       subtitle: "Awaiting response",
@@ -147,7 +94,11 @@ export function TeamMembersContent({ team }: { team: Team }) {
 
   return (
     <>
-      <TeamStats membersCount={teamMembers.length} team={team} />
+      <TeamStats
+        invitationsCount={invitations.length}
+        membersCount={teamMembers.length}
+        team={team}
+      />
 
       {isPending ? (
         <TeamTableSkeleton />
