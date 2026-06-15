@@ -21,8 +21,8 @@
     "typescript": "6.0.3"
   },
   "dependencies": {
-    "@hexclave/next": "^1.0.1",
-    "convex": "^1.40.0",
+    "@hexclave/next": "^1.0.14",
+    "convex": "^1.41.0",
     "zod": "4.4.3"
   }
 }
