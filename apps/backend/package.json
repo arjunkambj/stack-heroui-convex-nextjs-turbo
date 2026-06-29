@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@hexclave/next": "^1.0.14",
-    "convex": "^1.41.0",
+    "convex": "^1.42.0",
     "zod": "4.4.3"
   }
 }
